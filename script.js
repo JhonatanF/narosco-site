@@ -49,7 +49,7 @@
 
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(245, 166, 35, 0.25)';
+      ctx.fillStyle = 'rgba(234, 88, 12, 0.25)';
       ctx.fill();
     });
 
@@ -64,7 +64,7 @@
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(245, 166, 35, ${alpha})`;
+          ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -79,7 +79,7 @@
         ctx.beginPath();
         ctx.moveTo(dots[i].x, dots[i].y);
         ctx.lineTo(MOUSE.x, MOUSE.y);
-        ctx.strokeStyle = `rgba(245, 166, 35, ${alpha})`;
+        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
       }
@@ -120,7 +120,7 @@
       html += `
         <line
           x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}"
-          stroke="rgba(245,166,35,0.25)" stroke-width="1"
+          stroke="rgba(234,88,12,0.25)" stroke-width="1"
           stroke-dasharray="4 4"
           style="animation: dash-anim 2s linear ${delay}s infinite"
         />`;
@@ -263,16 +263,39 @@
         </svg>
         Enviando...`;
 
-      // Simulate async submit (replace with real endpoint)
-      await new Promise(r => setTimeout(r, 1500));
+      try {
+        const formData = new FormData(form);
+        
+        // --- CONFIGURAÇÃO WEB3FORMS ---
+        // 1. Acesse https://web3forms.com/
+        // 2. Coloque o email contato@narosco.com para gerar uma Access Key gratuita
+        // 3. Substitua 'SUA_ACCESS_KEY_AQUI' pela chave recebida no email
+        formData.append("access_key", "SUA_ACCESS_KEY_AQUI");
+        formData.append("subject", "Novo Lead do Site - Narosco");
+        formData.append("from_name", "Narosco Website");
 
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-      form.reset();
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
 
-      if (modal) {
-        modal.hidden = false;
-        modal.querySelector('#modal-close')?.focus();
+        const data = await res.json();
+
+        if (data.success) {
+          form.reset();
+          if (modal) {
+            modal.hidden = false;
+            modal.querySelector('#modal-close')?.focus();
+          }
+        } else {
+          alert("Ocorreu um erro ao enviar (" + (data.message || 'Desconhecido') + "). Por favor, tente novamente.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Ocorreu um erro de rede. Verifique sua conexão e tente novamente.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
       }
 
       // Close modal on backdrop click
