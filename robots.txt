@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://narosco.com/sitemap.xml
