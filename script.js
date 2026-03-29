@@ -265,12 +265,12 @@
 
       try {
         const formData = new FormData(form);
-        
+
         // --- CONFIGURAÇÃO WEB3FORMS ---
         // 1. Acesse https://web3forms.com/
         // 2. Coloque o email contato@narosco.com para gerar uma Access Key gratuita
         // 3. Substitua 'SUA_ACCESS_KEY_AQUI' pela chave recebida no email
-        formData.append("access_key", "SUA_ACCESS_KEY_AQUI");
+        formData.append("access_key", "8b31ae2b-3b21-40bd-bf48-d7163ded65c3");
         formData.append("subject", "Novo Lead do Site - Narosco");
         formData.append("from_name", "Narosco Website");
 
