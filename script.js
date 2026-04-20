@@ -49,7 +49,7 @@
 
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(234, 88, 12, 0.25)';
+      ctx.fillStyle = 'rgba(249, 115, 22, 0.25)';
       ctx.fill();
     });
 
@@ -64,7 +64,7 @@
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+          ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -79,7 +79,7 @@
         ctx.beginPath();
         ctx.moveTo(dots[i].x, dots[i].y);
         ctx.lineTo(MOUSE.x, MOUSE.y);
-        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+        ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
       }
@@ -120,7 +120,7 @@
       html += `
         <line
           x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}"
-          stroke="rgba(234,88,12,0.25)" stroke-width="1"
+          stroke="rgba(249,115,22,0.25)" stroke-width="1"
           stroke-dasharray="4 4"
           style="animation: dash-anim 2s linear ${delay}s infinite"
         />`;
