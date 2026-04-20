@@ -22,6 +22,12 @@
   --border: #e0e0e0;
   --border-accent: rgba(249, 115, 22, 0.3);
 
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --modal-bg: rgba(255, 255, 255, 0.85);
+  --manifesto-tag-border: rgba(255, 255, 255, 0.4);
+  --manifesto-text: rgba(255, 255, 255, 0.9);
+  --manifesto-pattern: rgba(255, 255, 255, 0.25);
+
   --font-display: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
 
@@ -30,6 +36,25 @@
 
   --transition: 240ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-0: #080a0f;
+  --bg-1: #0d1117;
+  --bg-2: #131921;
+  --bg-3: #1c2535;
+
+  --text-0: #f0f4ff;
+  --text-1: #a8b3cc;
+  --text-2: #5c6b84;
+
+  --border: rgba(255, 255, 255, 0.07);
+
+  --nav-bg: rgba(8, 10, 15, 0.8);
+  --modal-bg: rgba(8, 10, 15, 0.85);
+  --manifesto-tag-border: rgba(8, 10, 15, 0.25);
+  --manifesto-text: rgba(8, 10, 15, 0.85);
+  --manifesto-pattern: rgba(8, 10, 15, 0.15);
 }
 
 /* ── RESET ── */
@@ -43,7 +68,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
 body {
@@ -139,7 +164,7 @@ button {
   gap: 2rem;
   padding: 0 clamp(20px, 5vw, 60px);
   height: 64px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   transition: border-color var(--transition);
@@ -551,7 +576,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-image: radial-gradient(var(--manifesto-pattern) 1px, transparent 1px);
   background-size: 16px 16px;
   pointer-events: none;
   opacity: 1;
@@ -564,7 +589,7 @@ button {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--bg-0);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border: 1.5px solid var(--manifesto-tag-border);
   border-radius: 100px;
   padding: 6px 16px;
   margin-bottom: 2rem;
@@ -607,7 +632,7 @@ button {
   max-width: 840px;
   margin: 0 auto;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--manifesto-text);
   position: relative;
   z-index: 2;
 }
@@ -1105,7 +1130,7 @@ option {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--modal-bg);
   backdrop-filter: blur(8px);
 }
 

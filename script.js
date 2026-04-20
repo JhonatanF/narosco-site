@@ -11,6 +11,42 @@
 (function () {
   'use strict';
 
+  // ── 0. THEME MANAGEMENT ────────────────────────────────────────
+  const themeToggle = document.getElementById('theme-toggle');
+  const iconSun = document.querySelector('.icon-sun');
+  const iconMoon = document.querySelector('.icon-moon');
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      iconSun.style.display = 'block';
+      iconMoon.style.display = 'none';
+    } else {
+      iconSun.style.display = 'none';
+      iconMoon.style.display = 'block';
+    }
+  }
+
+  // Detect user preference or saved theme
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else if (prefersDark) {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+  }
+
   // ── 1. ANIMATED GRID CANVAS ────────────────────────────────────
   const canvas = document.getElementById('grid-canvas');
   const ctx = canvas.getContext('2d');
