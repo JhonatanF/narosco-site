@@ -359,11 +359,138 @@
     initFAQ();
     initNav();
     initForm();
+    initChatWidget();
   });
 
   // CSS spin keyframe for loader
   const style = document.createElement('style');
   style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
   document.head.appendChild(style);
+
+  // ── AI CHAT WIDGET LOGIC ─────────────────────────────────────
+  function initChatWidget() {
+    const chatWidget = document.getElementById('chat-widget');
+    const toggleBtn = document.getElementById('chat-toggle-btn');
+    const panel = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('chat-close-btn');
+    const badge = document.getElementById('chat-badge');
+    const messageContainer = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const inputField = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send-btn');
+    
+    // Status visual
+    let isOpen = false;
+
+    // Abrir/Fechar Widget
+    function toggleChat() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        panel.hidden = false;
+        badge.style.display = 'none'; // Esconde badge de "não lido"
+        inputField.focus();
+        scrollToBottom();
+      } else {
+        panel.hidden = true;
+      }
+    }
+
+    toggleBtn?.addEventListener('click', toggleChat);
+    closeBtn?.addEventListener('click', toggleChat);
+
+    // Enter press
+    inputField?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event('submit'));
+      }
+    });
+
+    // Handle Input
+    inputField?.addEventListener('input', () => {
+      sendBtn.disabled = inputField.value.trim() === '';
+    });
+
+    chatForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = inputField.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user');
+      inputField.value = '';
+      sendBtn.disabled = true;
+
+      // Mocking typing indicator
+      const typingId = appendTypingIndicator();
+      
+      // Async Call -> Backend Architecture
+      try {
+        const response = await sendToSupportBot(message);
+        removeTypingIndicator(typingId);
+        appendMessage(response, 'bot');
+      } catch (err) {
+        removeTypingIndicator(typingId);
+        appendMessage("Desculpe, nossos sistemas de IA estão ocupados no momento. Poderia tentar reiniciar a conversa ou entrar em contato via e-mail?", 'bot');
+      }
+    });
+
+    function appendMessage(text, senderType) {
+      const div = document.createElement('div');
+      div.className = `chat-message ${senderType}`;
+      div.innerHTML = `<div class="message-content">${text}</div>`;
+      messageContainer.appendChild(div);
+      scrollToBottom();
+    }
+
+    function appendTypingIndicator() {
+      const id = 'typing-' + Date.now();
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = 'chat-message bot typing-indicator';
+      div.innerText = 'Digitando...'; // Placeholder, ideally dots animation
+      div.style.opacity = '0.6';
+      div.style.fontStyle = 'italic';
+      messageContainer.appendChild(div);
+      scrollToBottom();
+      return id;
+    }
+
+    function removeTypingIndicator(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function scrollToBottom() {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+  }
+
+  /**
+   * Ponte Segura para o Backend Node.js
+   * Essa função não deve conter chaves/API secrets diretamente no client.
+   * Ela despacha a requisição HTTP POST pro endpoint /api/chat.
+   */
+  async function sendToSupportBot(userMessage) {
+    // ⚠️ EM DESENVOLVIMENTO:
+    // Esta requisição está roteada para o backend desenhado no arquivo de arquitetura.
+    // Como ainda não temos o servidor de pé, faremos um mock inteligente (Demo).
+    
+    // MOCK RESPONSE
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve("Certo, entendi! Nossos agentes autônomos podem avaliar o escopo dessa operação por completo. Posso pedir um e-mail para que nossa equipe te faça uma proposta segura?");
+      }, 1500);
+    });
+
+    /* PRODUCTION:
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMessage })
+    });
+    const data = await response.json();
+    return data.reply;
+    */
+  }
 
 })();
