@@ -1,0 +1,192 @@
+name: PR Code Review — Security & Quality
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write   # para postar comentário no PR
+
+concurrency:
+  group: pr-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # ──────────────────────────────────────────────────────────────
+  # 1. LINT — JavaScript (ESLint) + CSS (Stylelint) + HTML (html-validate)
+  # ──────────────────────────────────────────────────────────────
+  lint:
+    name: Lint (JS / CSS / HTML)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install lint tools
+        run: |
+          npm install --save-dev \
+            eslint \
+            eslint-plugin-security \
+            stylelint \
+            stylelint-config-standard \
+            html-validate
+
+      # --- JavaScript ---
+      - name: Run ESLint
+        run: |
+          npx eslint \
+            --no-eslintrc \
+            --env browser,es2022 \
+            --plugin security \
+            --rule '{"no-eval": "error", "no-implied-eval": "error", "no-new-func": "error", "security/detect-eval-with-expression": "error", "security/detect-non-literal-regexp": "warn", "no-console": "warn", "no-unused-vars": "warn"}' \
+            "*.js" \
+            --format stylish
+
+      # --- CSS ---
+      - name: Run Stylelint
+        run: |
+          npx stylelint \
+            --config '{"extends":["stylelint-config-standard"],"rules":{"color-no-invalid-hex":"error","no-duplicate-selectors":"warn","declaration-block-no-duplicate-properties":"warn"}}' \
+            "style.css"
+
+      # --- HTML ---
+      - name: Run html-validate
+        run: |
+          npx html-validate \
+            --config '{"extends":["html-validate:recommended"],"rules":{"meta-refresh":"error","script-type":"off","no-inline-style":"warn"}}' \
+            "index.html"
+
+  # ──────────────────────────────────────────────────────────────
+  # 2. SECURITY — Gitleaks (secrets) + Semgrep SAST + broken links
+  # ──────────────────────────────────────────────────────────────
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # histórico completo para gitleaks
+
+      # Detecta tokens, chaves de API e secrets expostos no código
+      - name: Gitleaks — Secret Detection
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # SAST estático para JS/HTML: XSS, innerHTML inseguro, eval, etc.
+      - name: Semgrep — Static Analysis
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            p/javascript
+            p/owasp-top-ten
+            p/xss
+            p/secrets
+
+      # Verifica links quebrados no HTML
+      - name: Check broken links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --exclude 'localhost'
+            --exclude 'mailto:'
+            index.html
+          fail: false   # reporta mas não bloqueia o merge
+
+  # ──────────────────────────────────────────────────────────────
+  # 3. CONTENT SECURITY — inline scripts, mixed content, padrões perigosos
+  # ──────────────────────────────────────────────────────────────
+  csp-check:
+    name: CSP & Security Patterns
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect dangerous inline patterns
+        run: |
+          set +e   # não para no primeiro erro; queremos coletar tudo
+          ERRORS=0
+
+          echo "=== Checking for dangerous patterns ==="
+
+          # eval()
+          if grep -rn '\beval\s*(' --include="*.js" . | grep -v '//'; then
+            echo "❌ eval() usage detected — not allowed"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # document.write
+          if grep -rn 'document\.write\b' --include="*.js" --include="*.html" . | grep -v '//'; then
+            echo "❌ document.write() detected — not allowed"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # Links HTTP (mixed content)
+          if grep -rEn '(src|href)="http://' --include="*.html" . | grep -v 'http://localhost'; then
+            echo "❌ Insecure HTTP links found — use HTTPS"
+            ERRORS=$((ERRORS+1))
+          fi
+
+          # innerHTML com concatenação de variáveis (risco XSS)
+          if grep -rEn 'innerHTML\s*[+]?=\s*[^"'"'"']' --include="*.js" . | grep -v '//'; then
+            echo "⚠️  WARNING: Dynamic innerHTML detected — review for XSS"
+          fi
+
+          echo "=== Pattern check complete (errors: $ERRORS) ==="
+          [ "$ERRORS" -eq 0 ] && echo "✅ No critical patterns found" || exit 1
+
+  # ──────────────────────────────────────────────────────────────
+  # 4. SUMMARY — Posta resultado resumido no PR como comentário
+  # ──────────────────────────────────────────────────────────────
+  summary:
+    name: Post Review Summary
+    runs-on: ubuntu-latest
+    needs: [lint, security, csp-check]
+    if: always()
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const jobs = {
+              lint:     '${{ needs.lint.result }}',
+              security: '${{ needs.security.result }}',
+              csp:      '${{ needs.csp-check.result }}'
+            };
+
+            const icon = r => r === 'success' ? '✅' : r === 'skipped' ? '⏭️' : '❌';
+            const allPassed = Object.values(jobs).every(r => r === 'success');
+
+            const body = [
+              '## 🔍 Code Review Automático — Narosco',
+              '',
+              '| Check | Status |',
+              '|-------|--------|',
+              `| 🔧 Lint (JS/CSS/HTML) | ${icon(jobs.lint)} \`${jobs.lint}\` |`,
+              `| 🔐 Security Scan (Gitleaks + Semgrep) | ${icon(jobs.security)} \`${jobs.security}\` |`,
+              `| 🛡️ CSP & Inline Patterns | ${icon(jobs.csp)} \`${jobs.csp}\` |`,
+              '',
+              allPassed
+                ? '### ✅ Todos os checks passaram — PR pronto para revisão humana.'
+                : '### ❌ Um ou mais checks falharam. Corrija antes do merge.',
+              '',
+              '> _Gerado automaticamente pelo workflow `pr-review.yml`_'
+            ].join('\n');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
