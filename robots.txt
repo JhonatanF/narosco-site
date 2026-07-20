@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow AI Bots for Generative Engine Optimization
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://narosco.com/sitemap.xml

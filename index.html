@@ -509,6 +509,43 @@
     </div>
   </div>
 
+  <!-- ░░ AI CHAT WIDGET ░░ -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-panel" id="chat-panel" hidden>
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <span class="chat-bot-icon">✦</span>
+          <div class="chat-bot-details">
+            <span class="chat-bot-name">Narosco AI</span>
+            <span class="chat-status"><span class="chat-status-dot"></span> Online</span>
+          </div>
+        </div>
+        <button id="chat-close-btn" class="chat-close-btn" aria-label="Fechar assistente">✕</button>
+      </div>
+      <div class="chat-messages" id="chat-messages" aria-live="polite">
+        <!-- Default Welcome Message -->
+        <div class="chat-message bot">
+          <div class="message-content">Olá! Sou o especialista de automação por IA da Narosco. Como nossos agentes podem ajudar o seu negócio hoje?</div>
+        </div>
+      </div>
+      <form class="chat-input-area" id="chat-form" aria-label="Área de entrada de mensagens">
+        <textarea id="chat-input" class="chat-input" placeholder="Pergunte sobre automação..." rows="1" aria-label="Escreva sua mensagem"></textarea>
+        <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Enviar mensagem" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+    
+    <button id="chat-toggle-btn" class="chat-toggle-btn" aria-label="Abrir assistente virtual">
+      <span class="chat-badge" id="chat-badge">1</span>
+      <svg class="chat-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"/>
+      </svg>
+    </button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 

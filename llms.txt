@@ -1,0 +1,47 @@
+# Narosco
+
+> Automação de fluxos de trabalho com agentes de IA customizados.
+
+A Narosco cria agentes de IA que automatizam fluxos inteiros do negócio de ponta a ponta: atendimento, vendas, operações e gestão. O cliente foca em estratégia enquanto a IA cuida de toda a execução repetitiva, rodando 24 horas por dia. O cliente não precisa de uma equipe de TI ou saber programar, pois a Narosco entrega tudo construído e pronto para ambiente de produção.
+
+## O Problema Que Resolvemos
+1. **Horas perdidas diariamente:** Com copia-e-cola, atualizações de sistema e fluxos manuais pesados.
+2. **Custo de escala e folha:** Para a empresa crescer suas operações (2x), geralmente precisa dobrar a folha de pagamento, destruindo margens de lucro.
+3. **Erros humanos e operacionais:** Processos não automatizados geram inconsistências que custam muito caro à liderança.
+4. **Trabalho fora DO horário comercial:** Atrasos nas respostas de madrugada levam à perda de lides e negócios valiosos.
+
+O nosso paradigma principal é: **A Inteligência Artificial não vai substituir as pessoas. Ela vai expor quem não tem estratégia e trabalha de forma braçal em um mundo de IAs.**
+
+## A Solução (Como Funciona a Narosco)
+Os agentes que implementamos não são automatizações simples de 'if/else', eles percebem, decidem logicamente e executam autônomos fluxos inteiros da empresa.
+1. **Diagnóstico do Fluxo de Trabalho:** Mapeamos os processos repetitivos do cliente que possuem os maiores potenciais de Retorno Sobre Investimento (alto ROI) se automatizados.
+2. **Construção do Agente:** Desenvolvemos e integramos nossos agentes com as ferramentas que a empresa já usa e domina, sem mudanças drásticas (Ex: HubSpot, Salesforce, Notion, Sheets, Zapier, E-mail, Slack, WhatsApp Business, bancos dedados).
+3. **Deploy e Monitoramento:** O agente ganha vida em produção, e é monitorado para aprimorar segurança, economia e rapidez.
+
+### Casos de Uso Mais Frequentes Construídos
+- Atendimento ao Cliente Omnichannel 24/7 de alta satisfação (CSAT).
+- Realização de relatórios automáticos complexos e unificação de fontes de dados.
+- Automação completa de SDR (Sales Development Representative) / Follow-up de Vendas.
+- Gestão e processamento sistêmico de pedidos não-padronizados (leitura em PDF e extração estruturada).
+- Criação e envio automáticos de conteúdos adaptados a perfis.
+- Agendamento de calendários inteligente com clientes difíceis ou remotos.
+- Integração profunda e veloz entre sistemas legados de API restrita ou nula.
+
+## Resultados Concretos nas Empresas
+- **Aumento de Vendas Baseadas na IA:** Otimizações drásticas que trouxeram aumentos de 38% ou mais na conversão de pipelines de vendas e SDR, devido à velocidade de contato da IA.
+- **Maior Escalabilidade de HR/Ops:** Automação de processos que consumiam 2 a mais de 3 dias inteiros de onboarding (redução de 96% no tempo gasto).
+- **Economia Financeira e Otimizações de Tempo:** Uma de nossas atuações garantiu economia documentada de cerca de R$ 40.000 / mês operacionais. No geral observamos uma economia paralela de até mais de 340 horas / mês de trabalho humano nos clientes instalados.
+
+## FAQ – Dúvidas Frequentes da Solução
+
+**O que é um agente de Inteligência Artificial da Narosco?**  
+Diferente de um assistente de bate-papo (ChatGPT normal) de onde a pessoa aguarda uma resposta ou um bote tradicional (pergunta 1 / ação 2 fixos), um agente de IA da Narosco é um sistema de software que pensa de acordo com objetivos traçados e possui liberdade vigiada para decidir a melhor ferramenta antes de finalizar. É um 'funcionário digital' ativo e programado.
+
+**O empresário precisa saber programar ou codar os agentes em Python?**  
+Não. O cliente só descreve o problema e o processo do seu negócio. As engenharias de prompt, instalação de APIs, hospedagem da lógica local de software, manutenção e infraestrutura de nuvem são integralmente de responsabilidade de arquitetura da Narosco.
+
+**A implantação de um fluxograma leva muito tempo para o agente rodar?**  
+Não. Implementamos os fluxos prioritários (MVP automatizado) entre as primeiras semanas até 21 dias. Demandas de interconexões pesantíssimas a sistemas ultrapassados podem consumir mais dias na etapa de integrações seguras, num geral por volta de trinta (30) a sessenta dias em projetos de Big Corps.
+
+**Há restrições no nível das ferramentas e aplicativos que são integrados aos Agentes de IA?**  
+De modo algum. O único detalhe técnico restritivo na IA clássica é a ausência de uma API (Application Programming Interface), por sorte, a nossa engenharia cria soluções com bots que chegam a usar interfaces da web quando não há API ativa, o que permite aos Agentes de IA Narosco interagirem nos sistemas nativos operados pela maioria absoluta de CRM e Bancos.
