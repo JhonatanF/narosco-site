@@ -465,32 +465,40 @@
     }
   }
 
+  // Gerenciamento de Session ID
+  let sessionId = sessionStorage.getItem('chat_session_id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    sessionStorage.setItem('chat_session_id', sessionId);
+  }
+
   /**
-   * Ponte Segura para o Backend Node.js
-   * Essa função não deve conter chaves/API secrets diretamente no client.
-   * Ela despacha a requisição HTTP POST pro endpoint /api/chat.
+   * Ponte Segura para o Backend Cloudflare Workers
    */
   async function sendToSupportBot(userMessage) {
-    // ⚠️ EM DESENVOLVIMENTO:
-    // Esta requisição está roteada para o backend desenhado no arquivo de arquitetura.
-    // Como ainda não temos o servidor de pé, faremos um mock inteligente (Demo).
-    
-    // MOCK RESPONSE
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve("Certo, entendi! Nossos agentes autônomos podem avaliar o escopo dessa operação por completo. Posso pedir um e-mail para que nossa equipe te faça uma proposta segura?");
-      }, 1500);
-    });
+    try {
+      // Altere a URL base conforme o deploy no Cloudflare Workers
+      // Ex: https://narosco-api.seu-usuario.workers.dev/api/chat
+      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:8787/api/chat'
+        : 'https://narosco-api.jhonatanf.workers.dev/api/chat';
 
-    /* PRODUCTION:
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userMessage })
-    });
-    const data = await response.json();
-    return data.reply;
-    */
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage, sessionId })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.reply;
+    } catch (error) {
+      console.error("Erro na comunicação com o Bot:", error);
+      throw error;
+    }
   }
 
 })();
