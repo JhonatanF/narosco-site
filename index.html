@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Security: referrer policy to prevent info leakage to third-party origins -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- Security: Content Security Policy — restrict script/style sources -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787; img-src 'self' data:; frame-src 'none';" />
   <title>Narosco — Automatize seu Negócio com Agentes de IA</title>
   <meta name="description"
     content="Narosco cria agentes de IA que automatizam fluxos de trabalho completos. Elimine tarefas repetitivas, escale operações e recupere horas do seu dia — sem precisar de um time de TI." />
@@ -71,6 +76,7 @@
   </script>
 
   <!-- Three.js global build (ai-engine.js usa window.THREE) -->
+  <!-- Version pinned to 0.160.1. To add SRI: openssl dgst -sha384 -binary three.min.js | openssl base64 -A -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
 
   <!-- Spline Viewer -->
@@ -89,8 +95,8 @@
   <!-- ░░ NAV ░░ -->
   <nav class="nav" id="main-nav" aria-label="Navegação principal">
     <a href="/" class="nav-logo" aria-label="Narosco home">
-      <span class="logo-mark"></span>
-      narosco
+      <img src="logo-light.svg" alt="Narosco" class="logo-img theme-light-only" />
+      <img src="logo-dark.svg" alt="Narosco" class="logo-img theme-dark-only" />
     </a>
     <div class="nav-links">
       <a href="#como-funciona">Como funciona</a>
@@ -572,8 +578,8 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="/" class="nav-logo" aria-label="Narosco">
-          <span class="logo-mark"></span>
-          narosco
+          <img src="logo-light.svg" alt="Narosco" class="logo-img theme-light-only" />
+          <img src="logo-dark.svg" alt="Narosco" class="logo-img theme-dark-only" />
         </a>
         <p>Agentes de IA que automatizam processos e eliminam trabalho manual.<br />Do diagnóstico ao deploy em até 21 dias.</p>
       </div>

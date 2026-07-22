@@ -181,22 +181,25 @@ button {
   color: var(--text-0);
 }
 
-.logo-mark {
-  width: 28px;
-  height: 28px;
-  background: var(--accent);
-  border-radius: 6px;
+.logo-img {
+  height: 36px;
+  width: auto;
   display: block;
-  position: relative;
   flex-shrink: 0;
 }
 
-.logo-mark::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  background: var(--bg-0);
-  border-radius: 3px;
+/* Theme swapping logic */
+[data-theme="light"] .theme-dark-only {
+  display: none !important;
+}
+
+[data-theme="dark"] .theme-light-only {
+  display: none !important;
+}
+
+/* Default fallback (Dark theme is standard if not specified) */
+:root:not([data-theme="light"]) .theme-light-only {
+  display: none !important;
 }
 
 .nav-links {

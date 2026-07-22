@@ -1,0 +1,10 @@
+# .gitleaksignore
+# -----------------------------------------------------------
+# Web3Forms public access_key in script.js
+# This is a PUBLIC form submission key — it is NOT a secret credential.
+# It only allows sending form data to the configured email address.
+# No backend data, database, or admin access is possible with this key.
+# Risk: form spam (mitigated by Web3Forms rate-limiting + honeypot).
+# Reference: https://web3forms.com/faq#is-it-safe-to-use-access-key-in-frontend
+# -----------------------------------------------------------
+8b31ae2b-3b21-40bd-bf48-d7163ded65c3

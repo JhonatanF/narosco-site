@@ -437,7 +437,11 @@
     function appendMessage(text, senderType) {
       const div = document.createElement('div');
       div.className = `chat-message ${senderType}`;
-      div.innerHTML = `<div class="message-content">${text}</div>`;
+      // Security: use textContent to prevent XSS from user-supplied messages
+      const content = document.createElement('div');
+      content.className = 'message-content';
+      content.textContent = text;
+      div.appendChild(content);
       messageContainer.appendChild(div);
       scrollToBottom();
     }

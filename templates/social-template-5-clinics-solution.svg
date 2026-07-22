@@ -1,0 +1,47 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#f97316"/>
+  
+  <!-- Sub-header -->
+  <text x="100" y="240" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="30" fill="#111111" letter-spacing="4px" text-transform="uppercase">
+    Recepção Virtual 24H
+  </text>
+  <rect x="100" y="270" width="80" height="6" fill="#111111" />
+  
+  <!-- Headline -->
+  <text x="100" y="400" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="100" fill="#111111" letter-spacing="-3px">
+    <tspan x="100" dy="0">Agendamento</tspan>
+    <tspan x="100" dy="110">Automático</tspan>
+    <tspan x="100" dy="110">no WhatsApp</tspan>
+  </text>
+  
+  <!-- Flow Diagram Representation -->
+  <g transform="translate(100, 700)" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="28" fill="#111111">
+    <!-- Box 1 -->
+    <rect x="0" y="0" width="220" height="80" rx="12" fill="#111111" />
+    <text x="110" y="48" fill="#f97316" text-anchor="middle">WhatsApp</text>
+    
+    <!-- Arrow 1 -->
+    <path d="M 230 40 L 270 40" stroke="#111111" stroke-width="4" stroke-dasharray="8 8"/>
+    <polygon points="275,40 260,30 260,50" fill="#111111"/>
+
+    <!-- Box 2 -->
+    <rect x="290" y="0" width="220" height="80" rx="12" fill="#111111" />
+    <text x="400" y="48" fill="#f97316" text-anchor="middle">Agente IA</text>
+    
+    <!-- Arrow 2 -->
+    <path d="M 520 40 L 560 40" stroke="#111111" stroke-width="4" stroke-dasharray="8 8"/>
+    <polygon points="565,40 550,30 550,50" fill="#111111"/>
+
+    <!-- Box 3 -->
+    <rect x="580" y="0" width="250" height="80" rx="12" fill="#111111" />
+    <text x="705" y="48" fill="#f97316" text-anchor="middle">Sua Agenda</text>
+  </g>
+  
+  <!-- Footer Logo -->
+  <g transform="translate(100, 930) scale(0.6)">
+    <polygon points="60,15 98.97,37.5 98.97,82.5 60,105 21.03,82.5 21.03,37.5" fill="#111111"/>
+    <path d="M 40.52 48.75 L 79.48 48.75 L 60 82.5 Z M 40.52 48.75 L 60 15 M 40.52 48.75 L 21.03 37.5 M 40.52 48.75 L 21.03 82.5 M 79.48 48.75 L 60 15 M 79.48 48.75 L 98.97 37.5 M 79.48 48.75 L 98.97 82.5 M 60 82.5 L 98.97 82.5 M 60 82.5 L 60 105 M 60 82.5 L 21.03 82.5" fill="none" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.9" stroke-linejoin="round"/>
+    <path d="M 40 80 V 40 H 54 L 70 68 V 40 H 80 V 80 H 66 L 50 52 V 80 Z" fill="#ffffff"/>
+    <text x="130" y="78" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="52" letter-spacing="-1px" fill="#111111">NAROSCO</text>
+  </g>
+</svg>
