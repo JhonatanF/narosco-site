@@ -38,15 +38,18 @@ jobs:
             stylelint-config-standard \
             html-validate
 
-      # --- JavaScript ---
+      # --- JavaScript (todos os arquivos: IIFEs + ES Modules) ---
+      # sourceType:module aceita import/export E também IIFEs — é um superset.
+      # no-console removido: o projeto usa console intencionalmente para diagnóstico.
       - name: Run ESLint
         run: |
           npx eslint \
             --no-eslintrc \
             --env browser,es2022 \
+            --parser-options "sourceType:module,ecmaVersion:2022" \
             --plugin security \
-            --rule '{"no-eval": "error", "no-implied-eval": "error", "no-new-func": "error", "security/detect-eval-with-expression": "error", "security/detect-non-literal-regexp": "warn", "no-console": "warn", "no-unused-vars": "warn"}' \
-            "*.js" \
+            --rule '{"no-eval": "error", "no-implied-eval": "error", "no-new-func": "error", "security/detect-eval-with-expression": "error", "security/detect-non-literal-regexp": "warn", "no-unused-vars": "warn"}' \
+            "script.js" "ai-engine.js" "hero-engine.js" \
             --format stylish
 
       # --- CSS ---

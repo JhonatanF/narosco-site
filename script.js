@@ -221,7 +221,7 @@
     });
 
     function checkReveal() {
-      revealEls.forEach((el, i) => {
+      revealEls.forEach((el) => {
         if (el.classList.contains('revealed')) return;
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight - 60) {
@@ -265,7 +265,6 @@
   // ── 6. NAV SCROLL BEHAVIOR ────────────────────────────────────
   function initNav() {
     const nav = document.getElementById('main-nav');
-    let lastY = 0;
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
@@ -274,7 +273,6 @@
       } else {
         nav.style.borderBottomColor = '';
       }
-      lastY = y;
     }, { passive: true });
   }
 
@@ -369,7 +367,6 @@
 
   // ── AI CHAT WIDGET LOGIC ─────────────────────────────────────
   function initChatWidget() {
-    const chatWidget = document.getElementById('chat-widget');
     const toggleBtn = document.getElementById('chat-toggle-btn');
     const panel = document.getElementById('chat-panel');
     const closeBtn = document.getElementById('chat-close-btn');
@@ -382,17 +379,34 @@
     // Status visual
     let isOpen = false;
 
-    // Abrir/Fechar Widget
-    function toggleChat() {
-      isOpen = !isOpen;
-      if (isOpen) {
-        panel.hidden = false;
-        badge.style.display = 'none'; // Esconde badge de "não lido"
-        inputField.focus();
+    // Abrir/Fechar Widget — animação via classe CSS, display:none após transição
+    function openChat() {
+      isOpen = true;
+      panel.hidden = false;           // torna visível no DOM
+      badge.style.display = 'none';   // oculta badge de não-lido
+      // Força o browser a fazer um reflow antes de adicionar a classe de entrada
+      // para que a transição CSS dispare corretamente a partir do estado inicial
+      requestAnimationFrame(() => {
+        panel.classList.add('chat-panel--open');
+      });
+      // Foca o input após a animação
+      setTimeout(() => {
+        inputField?.focus();
         scrollToBottom();
-      } else {
-        panel.hidden = true;
-      }
+      }, 210);
+    }
+
+    function closeChat() {
+      isOpen = false;
+      panel.classList.remove('chat-panel--open');
+      // Aguarda a transição (200ms) antes de realmente remover do layout
+      setTimeout(() => {
+        if (!isOpen) panel.hidden = true;
+      }, 210);
+    }
+
+    function toggleChat() {
+      if (isOpen) closeChat(); else openChat();
     }
 
     toggleBtn?.addEventListener('click', toggleChat);
