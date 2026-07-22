@@ -76,11 +76,8 @@
   </script>
 
   <!-- Three.js global build (ai-engine.js usa window.THREE) -->
-  <!-- Security: version pinned and integrity hash for SRI protection -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"
-    integrity="sha384-iNRwKLfqMEGmPHsNjy/YFe5LDTF3f9JfcIJh1k5OPdvlvDYWbzSxYVIV5f7ib1"
-    crossorigin="anonymous"></script>
+  <!-- Version pinned to 0.160.1. To add SRI: openssl dgst -sha384 -binary three.min.js | openssl base64 -A -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
 
   <!-- Spline Viewer -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
