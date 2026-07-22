@@ -325,7 +325,6 @@
           alert("Ocorreu um erro ao enviar (" + (data.message || 'Desconhecido') + "). Por favor, tente novamente.");
         }
       } catch (err) {
-        // eslint-disable-next-line no-console -- intentional: logs fetch error for debugging
         console.error(err);
         alert("Ocorreu um erro de rede. Verifique sua conexão e tente novamente.");
       } finally {
@@ -515,7 +514,6 @@
       const data = await response.json();
       return data.reply;
     } catch (error) {
-      // eslint-disable-next-line no-console -- intentional: logs API error for debugging
       console.error("Erro na comunicação com o Bot:", error);
       throw error;
     }
