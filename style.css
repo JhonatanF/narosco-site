@@ -1478,11 +1478,14 @@ option {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  /* Critical: the wrapper itself must never block clicks on page content.
+     Only the visible child elements (button, panel) get pointer-events. */
+  pointer-events: none;
 }
 
 .chat-toggle-btn {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
@@ -1492,6 +1495,8 @@ option {
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
   transition: transform var(--transition), box-shadow var(--transition);
   position: relative;
+  /* Re-enable interaction on the button itself */
+  pointer-events: auto;
 }
 
 .chat-toggle-btn:hover {
@@ -1518,26 +1523,43 @@ option {
 }
 
 .chat-panel {
-  width: min(calc(100vw - 3rem), 380px);
-  height: min(calc(100vh - 8rem), 600px);
+  width: min(calc(100vw - 3rem), 360px);
+  /* Smaller height: enough for a few messages + input, not full-screen */
+  height: min(calc(100vh - 10rem), 480px);
   background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* Re-enable interaction on the open panel */
+  pointer-events: auto;
+  /* Animate via opacity + scale instead of toggling display */
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity var(--transition), transform var(--transition);
+  transform: translateY(0) scale(1);
+  transform-origin: bottom right;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .chat-panel[hidden] {
-  display: flex;
+  /* Use display:none so the panel takes NO space and blocks NO clicks */
+  display: none !important;
+}
+
+/* Initial state when panel is shown but before open class is added (start of animation) */
+.chat-panel:not(.chat-panel--open) {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(12px) scale(0.95);
   pointer-events: none;
+}
+
+/* Final state — panel is fully open */
+.chat-panel.chat-panel--open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .chat-header {
@@ -2007,3 +2029,36 @@ option {
     justify-content: center;
   }
 }
+
+/* ── Chat widget — mobile adjustments ── */
+@media (max-width: 640px) {
+  .chat-widget {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .chat-panel {
+    /* On phones: compact — ~65% of screen height, no wider than screen - 2rem */
+    width: calc(100vw - 2rem);
+    height: min(calc(100vh - 8rem), 380px);
+    margin-bottom: 0.5rem;
+  }
+
+  .chat-toggle-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .chat-messages {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .chat-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .chat-input-area {
+    padding: 0.65rem 0.75rem;
+  }
+}
