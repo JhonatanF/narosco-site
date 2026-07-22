@@ -1,0 +1,24 @@
+{
+  "name": "narosco-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ai-engine.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JhonatanF/narosco-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JhonatanF/narosco-site/issues"
+  },
+  "homepage": "https://github.com/JhonatanF/narosco-site#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

@@ -1,0 +1,11 @@
+<svg width="450" height="120" viewBox="0 0 450 120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="450" height="120" fill="#ffffff"/>
+  <!-- Icosahedron Base -->
+  <polygon points="60,15 98.97,37.5 98.97,82.5 60,105 21.03,82.5 21.03,37.5" fill="#f97316"/>
+  <!-- Geodesic Lines -->
+  <path d="M 40.52 48.75 L 79.48 48.75 L 60 82.5 Z M 40.52 48.75 L 60 15 M 40.52 48.75 L 21.03 37.5 M 40.52 48.75 L 21.03 82.5 M 79.48 48.75 L 60 15 M 79.48 48.75 L 98.97 37.5 M 79.48 48.75 L 98.97 82.5 M 60 82.5 L 98.97 82.5 M 60 82.5 L 60 105 M 60 82.5 L 21.03 82.5" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8" stroke-linejoin="round"/>
+  <!-- Letter N -->
+  <path d="M 40 80 V 40 H 54 L 70 68 V 40 H 80 V 80 H 66 L 50 52 V 80 Z" fill="#ffffff"/>
+  <!-- Wordmark -->
+  <text x="130" y="78" font-family="'Inter', 'Helvetica Neue', Helvetica, system-ui, sans-serif" font-weight="900" font-size="52" letter-spacing="-1px" fill="#111111">NAROSCO</text>
+</svg>

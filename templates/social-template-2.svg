@@ -1,0 +1,37 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bright Orange Background for High Visibility -->
+  <rect width="1080" height="1080" fill="#f97316"/>
+  
+  <!-- Giant Background Icosahedron Watermark -->
+  <g transform="translate(450, 100) scale(8)" opacity="0.08">
+    <polygon points="60,15 98.97,37.5 98.97,82.5 60,105 21.03,82.5 21.03,37.5" fill="#111111"/>
+    <path d="M 40.52 48.75 L 79.48 48.75 L 60 82.5 Z M 40.52 48.75 L 60 15 M 40.52 48.75 L 21.03 37.5 M 40.52 48.75 L 21.03 82.5 M 79.48 48.75 L 60 15 M 79.48 48.75 L 98.97 37.5 M 79.48 48.75 L 98.97 82.5 M 60 82.5 L 98.97 82.5 M 60 82.5 L 60 105 M 60 82.5 L 21.03 82.5" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Milestone Tag -->
+  <text x="100" y="300" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="30" fill="#111111" letter-spacing="4px" text-transform="uppercase">
+    Resultados Comprovados
+  </text>
+  <rect x="100" y="325" width="80" height="6" fill="#111111" />
+  
+  <!-- Main Metric/Achievement -->
+  <text x="100" y="480" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="145" fill="#111111" letter-spacing="-5px">
+    <tspan x="100" dy="0">Deploy</tspan>
+    <tspan x="100" dy="145">em 21 Dias</tspan>
+  </text>
+  
+  <!-- Subtext -->
+  <text x="100" y="700" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="42" fill="#111111" opacity="0.9">
+    <tspan x="100" dy="0">Do diagnóstico à operação.</tspan>
+    <tspan x="100" dy="60">Agentes autônomos trabalhando</tspan>
+    <tspan x="100" dy="60">para o seu negócio escalar.</tspan>
+  </text>
+  
+  <!-- Footer Logo (Orange Theme Version) -->
+  <g transform="translate(100, 930) scale(0.6)">
+    <polygon points="60,15 98.97,37.5 98.97,82.5 60,105 21.03,82.5 21.03,37.5" fill="#111111"/>
+    <path d="M 40.52 48.75 L 79.48 48.75 L 60 82.5 Z M 40.52 48.75 L 60 15 M 40.52 48.75 L 21.03 37.5 M 40.52 48.75 L 21.03 82.5 M 79.48 48.75 L 60 15 M 79.48 48.75 L 98.97 37.5 M 79.48 48.75 L 98.97 82.5 M 60 82.5 L 98.97 82.5 M 60 82.5 L 60 105 M 60 82.5 L 21.03 82.5" fill="none" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.9" stroke-linejoin="round"/>
+    <path d="M 40 80 V 40 H 54 L 70 68 V 40 H 80 V 80 H 66 L 50 52 V 80 Z" fill="#ffffff"/>
+    <text x="130" y="78" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="52" letter-spacing="-1px" fill="#111111">NAROSCO</text>
+  </g>
+</svg>
