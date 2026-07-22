@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Security: referrer policy to prevent info leakage to third-party origins -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- Security: Content Security Policy — restrict script/style sources -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787; img-src 'self' data:; frame-src 'none';" />
   <title>Narosco — Automatize seu Negócio com Agentes de IA</title>
   <meta name="description"
     content="Narosco cria agentes de IA que automatizam fluxos de trabalho completos. Elimine tarefas repetitivas, escale operações e recupere horas do seu dia — sem precisar de um time de TI." />
@@ -71,7 +76,11 @@
   </script>
 
   <!-- Three.js global build (ai-engine.js usa window.THREE) -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <!-- Security: version pinned and integrity hash for SRI protection -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"
+    integrity="sha384-iNRwKLfqMEGmPHsNjy/YFe5LDTF3f9JfcIJh1k5OPdvlvDYWbzSxYVIV5f7ib1"
+    crossorigin="anonymous"></script>
 
   <!-- Spline Viewer -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
