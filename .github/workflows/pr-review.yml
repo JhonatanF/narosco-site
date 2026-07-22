@@ -38,15 +38,27 @@ jobs:
             stylelint-config-standard \
             html-validate
 
-      # --- JavaScript ---
-      - name: Run ESLint
+      # --- JavaScript (IIFE / CommonJS scripts) ---
+      - name: Run ESLint — Scripts
         run: |
           npx eslint \
             --no-eslintrc \
             --env browser,es2022 \
             --plugin security \
             --rule '{"no-eval": "error", "no-implied-eval": "error", "no-new-func": "error", "security/detect-eval-with-expression": "error", "security/detect-non-literal-regexp": "warn", "no-console": "warn", "no-unused-vars": "warn"}' \
-            "*.js" \
+            "script.js" "ai-engine.js" \
+            --format stylish
+
+      # --- JavaScript (ES Modules — uses import/export) ---
+      - name: Run ESLint — ES Modules
+        run: |
+          npx eslint \
+            --no-eslintrc \
+            --env browser,es2022 \
+            --parser-options "sourceType:module" \
+            --plugin security \
+            --rule '{"no-eval": "error", "no-implied-eval": "error", "no-new-func": "error", "security/detect-eval-with-expression": "error", "security/detect-non-literal-regexp": "warn", "no-console": "warn", "no-unused-vars": "warn"}' \
+            "hero-engine.js" \
             --format stylish
 
       # --- CSS ---

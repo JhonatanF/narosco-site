@@ -19,6 +19,7 @@
 
   // Wait for Three.js to load
   if (typeof THREE === 'undefined') {
+    // eslint-disable-next-line no-console -- intentional: warns dev when THREE.js fails to load
     console.warn('[AI Engine] THREE.js not loaded yet');
     return;
   }

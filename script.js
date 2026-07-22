@@ -221,7 +221,7 @@
     });
 
     function checkReveal() {
-      revealEls.forEach((el, i) => {
+      revealEls.forEach((el) => {
         if (el.classList.contains('revealed')) return;
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight - 60) {
@@ -265,7 +265,6 @@
   // ── 6. NAV SCROLL BEHAVIOR ────────────────────────────────────
   function initNav() {
     const nav = document.getElementById('main-nav');
-    let lastY = 0;
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
@@ -274,7 +273,6 @@
       } else {
         nav.style.borderBottomColor = '';
       }
-      lastY = y;
     }, { passive: true });
   }
 
@@ -327,6 +325,7 @@
           alert("Ocorreu um erro ao enviar (" + (data.message || 'Desconhecido') + "). Por favor, tente novamente.");
         }
       } catch (err) {
+        // eslint-disable-next-line no-console -- intentional: logs fetch error for debugging
         console.error(err);
         alert("Ocorreu um erro de rede. Verifique sua conexão e tente novamente.");
       } finally {
@@ -369,7 +368,6 @@
 
   // ── AI CHAT WIDGET LOGIC ─────────────────────────────────────
   function initChatWidget() {
-    const chatWidget = document.getElementById('chat-widget');
     const toggleBtn = document.getElementById('chat-toggle-btn');
     const panel = document.getElementById('chat-panel');
     const closeBtn = document.getElementById('chat-close-btn');
@@ -517,6 +515,7 @@
       const data = await response.json();
       return data.reply;
     } catch (error) {
+      // eslint-disable-next-line no-console -- intentional: logs API error for debugging
       console.error("Erro na comunicação com o Bot:", error);
       throw error;
     }
