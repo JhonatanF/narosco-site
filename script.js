@@ -13,25 +13,17 @@
 
   // ── 0. THEME MANAGEMENT ────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
-  const iconSun = document.querySelector('.icon-sun');
-  const iconMoon = document.querySelector('.icon-moon');
 
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    if (theme === 'dark') {
-      iconSun.style.display = 'block';
-      iconMoon.style.display = 'none';
-    } else {
-      iconSun.style.display = 'none';
-      iconMoon.style.display = 'block';
-    }
+    // Icon visibility is handled by CSS via [data-theme] selectors
   }
 
   // Detect user preference or saved theme
   const savedTheme = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
+
   if (savedTheme) {
     setTheme(savedTheme);
   } else if (prefersDark) {
@@ -47,89 +39,84 @@
     });
   }
 
-  // ── 1. ANIMATED GRID CANVAS ────────────────────────────────────
+
+  // ── 1. ANIMATED GRID CANVAS (legado — canvas removido do HTML) ─
+  // O grid-canvas foi substituído pelo hero-canvas 3D (hero-engine.js).
+  // O código abaixo é mantido como fallback mas não executa se o canvas não existir.
   const canvas = document.getElementById('grid-canvas');
-  const ctx = canvas.getContext('2d');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
+    const DOT_COUNT = 80;
+    const MOUSE = { x: -9999, y: -9999 };
 
-  let W, H, dots = [];
-  const DOT_COUNT = 80;
-  const MOUSE = { x: -9999, y: -9999 };
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function initDots() {
-    dots = [];
-    for (let i = 0; i < DOT_COUNT; i++) {
-      dots.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.5 + 0.5,
-      });
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
     }
-  }
 
-  function drawFrame() {
-    ctx.clearRect(0, 0, W, H);
+    function initDots() {
+      dots = [];
+      for (let i = 0; i < DOT_COUNT; i++) {
+        dots.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 1.5 + 0.5,
+        });
+      }
+    }
 
-    // Update & draw dots
-    dots.forEach(d => {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > W) d.vx *= -1;
-      if (d.y < 0 || d.y > H) d.vy *= -1;
-
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(249, 115, 22, 0.25)';
-      ctx.fill();
-    });
-
-    // Draw connections
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
-          const alpha = (1 - dist / 130) * 0.12;
+    function drawFrame() {
+      ctx.clearRect(0, 0, W, H);
+      dots.forEach(d => {
+        d.x += d.vx;
+        d.y += d.vy;
+        if (d.x < 0 || d.x > W) d.vx *= -1;
+        if (d.y < 0 || d.y > H) d.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(249, 115, 22, 0.25)';
+        ctx.fill();
+      });
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x;
+          const dy = dots[i].y - dots[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            const alpha = (1 - dist / 130) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+        const mdx = dots[i].x - MOUSE.x;
+        const mdy = dots[i].y - MOUSE.y;
+        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mdist < 160) {
+          const alpha = (1 - mdist / 160) * 0.5;
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.lineTo(MOUSE.x, MOUSE.y);
           ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
-          ctx.lineWidth = 0.6;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         }
       }
-
-      // Mouse proximity highlight
-      const mdx = dots[i].x - MOUSE.x;
-      const mdy = dots[i].y - MOUSE.y;
-      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-      if (mdist < 160) {
-        const alpha = (1 - mdist / 160) * 0.5;
-        ctx.beginPath();
-        ctx.moveTo(dots[i].x, dots[i].y);
-        ctx.lineTo(MOUSE.x, MOUSE.y);
-        ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-      }
+      requestAnimationFrame(drawFrame);
     }
 
-    requestAnimationFrame(drawFrame);
+    window.addEventListener('resize', () => { resize(); initDots(); });
+    window.addEventListener('mousemove', e => { MOUSE.x = e.clientX; MOUSE.y = e.clientY; });
+    resize();
+    initDots();
+    drawFrame();
   }
-
-  window.addEventListener('resize', () => { resize(); initDots(); });
-  window.addEventListener('mousemove', e => { MOUSE.x = e.clientX; MOUSE.y = e.clientY; });
-
-  resize();
-  initDots();
-  drawFrame();
 
   // ── 2. AGENT DIAGRAM SVG CONNECTIONS ──────────────────────────
   function drawAgentConnections() {
@@ -331,11 +318,11 @@
         btn.disabled = false;
         btn.innerHTML = originalText;
       }
+    });
 
-      // Close modal on backdrop click
-      modal?.addEventListener('click', e => {
-        if (e.target === modal) modal.hidden = true;
-      });
+    // Fechar modal ao clicar no backdrop (fora do try/catch para não acumular listeners)
+    modal?.addEventListener('click', e => {
+      if (e.target === modal) modal.hidden = true;
     });
   }
 
@@ -357,166 +344,14 @@
     initFAQ();
     initNav();
     initForm();
-    initChatWidget();
+    // initChatWidget() gerenciado exclusivamente por chat-widget/chat.js
   });
+
 
   // CSS spin keyframe for loader
   const style = document.createElement('style');
   style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
   document.head.appendChild(style);
 
-  // ── AI CHAT WIDGET LOGIC ─────────────────────────────────────
-  function initChatWidget() {
-    const toggleBtn = document.getElementById('chat-toggle-btn');
-    const panel = document.getElementById('chat-panel');
-    const closeBtn = document.getElementById('chat-close-btn');
-    const badge = document.getElementById('chat-badge');
-    const messageContainer = document.getElementById('chat-messages');
-    const chatForm = document.getElementById('chat-form');
-    const inputField = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('chat-send-btn');
-    
-    // Status visual
-    let isOpen = false;
-
-    // Abrir/Fechar Widget — animação via classe CSS, display:none após transição
-    function openChat() {
-      isOpen = true;
-      panel.hidden = false;           // torna visível no DOM
-      badge.style.display = 'none';   // oculta badge de não-lido
-      // Força o browser a fazer um reflow antes de adicionar a classe de entrada
-      // para que a transição CSS dispare corretamente a partir do estado inicial
-      requestAnimationFrame(() => {
-        panel.classList.add('chat-panel--open');
-      });
-      // Foca o input após a animação
-      setTimeout(() => {
-        inputField?.focus();
-        scrollToBottom();
-      }, 210);
-    }
-
-    function closeChat() {
-      isOpen = false;
-      panel.classList.remove('chat-panel--open');
-      // Aguarda a transição (200ms) antes de realmente remover do layout
-      setTimeout(() => {
-        if (!isOpen) panel.hidden = true;
-      }, 210);
-    }
-
-    function toggleChat() {
-      if (isOpen) closeChat(); else openChat();
-    }
-
-    toggleBtn?.addEventListener('click', toggleChat);
-    closeBtn?.addEventListener('click', toggleChat);
-
-    // Enter press
-    inputField?.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        chatForm.dispatchEvent(new Event('submit'));
-      }
-    });
-
-    // Handle Input
-    inputField?.addEventListener('input', () => {
-      sendBtn.disabled = inputField.value.trim() === '';
-    });
-
-    chatForm?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const message = inputField.value.trim();
-      if (!message) return;
-
-      appendMessage(message, 'user');
-      inputField.value = '';
-      sendBtn.disabled = true;
-
-      // Mocking typing indicator
-      const typingId = appendTypingIndicator();
-      
-      // Async Call -> Backend Architecture
-      try {
-        const response = await sendToSupportBot(message);
-        removeTypingIndicator(typingId);
-        appendMessage(response, 'bot');
-      } catch (err) {
-        removeTypingIndicator(typingId);
-        appendMessage("Desculpe, nossos sistemas de IA estão ocupados no momento. Poderia tentar reiniciar a conversa ou entrar em contato via e-mail?", 'bot');
-      }
-    });
-
-    function appendMessage(text, senderType) {
-      const div = document.createElement('div');
-      div.className = `chat-message ${senderType}`;
-      // Security: use textContent to prevent XSS from user-supplied messages
-      const content = document.createElement('div');
-      content.className = 'message-content';
-      content.textContent = text;
-      div.appendChild(content);
-      messageContainer.appendChild(div);
-      scrollToBottom();
-    }
-
-    function appendTypingIndicator() {
-      const id = 'typing-' + Date.now();
-      const div = document.createElement('div');
-      div.id = id;
-      div.className = 'chat-message bot typing-indicator';
-      div.innerText = 'Digitando...'; // Placeholder, ideally dots animation
-      div.style.opacity = '0.6';
-      div.style.fontStyle = 'italic';
-      messageContainer.appendChild(div);
-      scrollToBottom();
-      return id;
-    }
-
-    function removeTypingIndicator(id) {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    }
-
-    function scrollToBottom() {
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
-  }
-
-  // Gerenciamento de Session ID
-  let sessionId = sessionStorage.getItem('chat_session_id');
-  if (!sessionId) {
-    sessionId = crypto.randomUUID();
-    sessionStorage.setItem('chat_session_id', sessionId);
-  }
-
-  /**
-   * Ponte Segura para o Backend Cloudflare Workers
-   */
-  async function sendToSupportBot(userMessage) {
-    try {
-      // Altere a URL base conforme o deploy no Cloudflare Workers
-      // Ex: https://narosco-api.seu-usuario.workers.dev/api/chat
-      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:8787/api/chat'
-        : 'https://narosco-api.jhonatanf.workers.dev/api/chat';
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, sessionId })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data.reply;
-    } catch (error) {
-      console.error("Erro na comunicação com o Bot:", error);
-      throw error;
-    }
-  }
-
 })();
+

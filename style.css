@@ -235,6 +235,40 @@ button {
   transform: translateY(-1px);
 }
 
+/* Nav actions wrapper (substitui inline style do HTML) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botão toggle de tema (substitui inline style do HTML) */
+.btn-theme-toggle {
+  padding: 6px;
+  border-radius: 50%;
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-0);
+  transition: background var(--transition);
+}
+
+.btn-theme-toggle:hover {
+  background: var(--accent-dim);
+}
+
+/* Visibilidade dos ícones de tema controlada via CSS (não via JS inline style) */
+.btn-theme-toggle .icon-sun { display: none; }
+.btn-theme-toggle .icon-moon { display: block; }
+
+[data-theme="dark"] .btn-theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .btn-theme-toggle .icon-moon { display: none; }
+
 /* ══════════════════════════
    HERO — Full-Screen 3D
 ══════════════════════════ */
