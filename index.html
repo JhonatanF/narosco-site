@@ -4,30 +4,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Security: referrer policy to prevent info leakage to third-party origins -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <!-- Security: Content Security Policy — restrict script/style sources -->
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787 https://renovator-zebra-poach.ngrok-free.dev; img-src 'self' data:; frame-src 'none';" />
-  <title>Narosco — Automatize seu Negócio com Agentes de IA</title>
+
+  <title>NAROSCO — Agentes de IA e Automação Inteligente</title>
   <meta name="description"
-    content="Narosco cria agentes de IA que automatizam fluxos de trabalho completos. Elimine tarefas repetitivas, escale operações e recupere horas do seu dia — sem precisar de um time de TI." />
-  <meta name="author" content="Narosco" />
-  <meta property="og:title" content="Narosco — Agentes de IA que Trabalham por Você" />
+    content="A NAROSCO cria agentes de Inteligência Artificial que automatizam processos empresariais, integram sistemas e executam operações 24/7." />
+  <meta name="author" content="NAROSCO" />
+  <link rel="canonical" href="https://narosco.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NAROSCO — Agentes de IA que Executam Processos Completos" />
   <meta property="og:description"
-    content="Automatize fluxos inteiros do seu negócio com agentes de IA customizados. 0 código necessário do seu lado." />
+    content="Construímos agentes de Inteligência Artificial que automatizam processos empresariais, integram seus sistemas e trabalham 24/7." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://narosco.com" />
+  <meta property="og:site_name" content="NAROSCO" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NAROSCO — Agentes de IA e Automação Inteligente" />
+  <meta name="twitter:description"
+    content="Agentes de IA que automatizam processos empresariais, integram sistemas e executam operações 24/7." />
 
   <!-- Schema: Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Narosco",
+    "name": "NAROSCO",
     "url": "https://narosco.com",
-    "description": "Automação de fluxos de trabalho com agentes de IA customizados",
-    "foundingDate": "2025"
+    "description": "Empresa de engenharia de IA que cria agentes inteligentes para automatizar processos empresariais",
+    "foundingDate": "2026"
+  }
+  </script>
+
+  <!-- Schema: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NAROSCO",
+    "url": "https://narosco.com"
+  }
+  </script>
+
+  <!-- Schema: Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Agentes de IA para Automação Empresarial",
+    "provider": {
+      "@type": "Organization",
+      "name": "NAROSCO"
+    },
+    "description": "Criação e implementação de agentes de Inteligência Artificial que executam processos empresariais completos, integram sistemas existentes e operam 24/7.",
+    "serviceType": "Artificial Intelligence Automation"
   }
   </script>
 
@@ -39,33 +73,65 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "O que é um agente de IA?",
+        "name": "O que é um agente de IA e como ele difere de uma automação comum?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Um agente de IA é um sistema autônomo que percebe, raciocina e age — executando fluxos de trabalho completos sem intervenção humana constante."
+          "text": "Um agente de IA é um sistema autônomo que percebe contexto, raciocina e executa ações — como um colaborador digital que nunca dorme. Diferente de automações if-then tradicionais, agentes tomam decisões complexas, lidam com exceções e se adaptam a situações novas sem intervenção humana."
         }
       },
       {
         "@type": "Question",
-        "name": "Preciso saber programar para usar os agentes da Narosco?",
+        "name": "Preciso ter equipe técnica para contratar a NAROSCO?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Não. A Narosco cuida de toda a implementação técnica. Você descreve o processo, nós construímos e entregamos o agente pronto."
+          "text": "Não. Você descreve o processo que quer automatizar em linguagem comum — nós cuidamos de 100% da implementação técnica. Diagnóstico, arquitetura, construção, integração, testes e deploy são feitos pela nossa equipe."
         }
       },
       {
         "@type": "Question",
-        "name": "Em quanto tempo o agente começa a funcionar?",
+        "name": "Em quanto tempo o agente entra em produção?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A maioria dos agentes entra em operação entre 7 e 21 dias após o diagnóstico inicial, dependendo da complexidade do fluxo."
+          "text": "A maioria dos agentes entra em produção entre 7 e 21 dias após o diagnóstico inicial. Fluxos com múltiplas integrações podem levar até 30 dias."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais sistemas o agente consegue integrar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Qualquer sistema com API: HubSpot, Salesforce, Notion, Google Workspace, Slack, WhatsApp Business, Pipedrive, Shopify, ERPs (TOTVS, SAP, Omie) e centenas de outras ferramentas. Também integramos sistemas legados via webhooks e conectores customizados."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Os dados da minha empresa ficam seguros?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Todos os dados trafegam com criptografia em trânsito e em repouso. Se precisar de controle total, hospedamos a solução inteiramente na sua infraestrutura — AWS, Azure ou GCP."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual a diferença entre a NAROSCO e ferramentas como Zapier ou Make?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Zapier e Make executam regras pré-definidas (se X, então Y). Agentes de IA compreendem contexto, raciocinam sobre situações novas e tomam decisões dentro de parâmetros definidos. É a diferença entre um fluxograma e um profissional pensando."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A IA vai substituir meus funcionários?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Não. Agentes de IA eliminam trabalho repetitivo e burocrático. Seus profissionais passam a focar em atividades estratégicas, criativas e de relacionamento — onde o talento humano é insubstituível."
         }
       }
     ]
   }
   </script>
 
-  <!-- Three.js ES Module importmap (hero-engine.js usa import) -->
+  <!-- Three.js ES Module importmap -->
   <script type="importmap">
   {
     "imports": {
@@ -75,16 +141,13 @@
   }
   </script>
 
-  <!-- Three.js global build (ai-engine.js usa window.THREE) -->
-  <!-- Version pinned to 0.160.1. To add SRI: openssl dgst -sha384 -binary three.min.js | openssl base64 -A -->
+  <!-- Three.js global build for ai-engine.js -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
-
-  <!-- Spline Viewer -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="chat-widget/chat.css" />
@@ -92,298 +155,299 @@
 
 <body>
 
-  <!-- ░░ NAV ░░ -->
+  <!-- ░░ NAVBAR ░░ -->
   <nav class="nav" id="main-nav" aria-label="Navegação principal">
-    <a href="/" class="nav-logo" aria-label="Narosco home">
-      <img src="/assets/images/logo-light.svg" alt="Narosco" class="logo-img theme-light-only" />
-      <img src="/assets/images/logo-dark.svg" alt="Narosco" class="logo-img theme-dark-only" />
+    <a href="/" class="nav-logo" aria-label="NAROSCO home">
+      <img src="/assets/images/logo-light.svg" alt="NAROSCO" class="logo-img" />
     </a>
     <div class="nav-links">
       <a href="#como-funciona">Como funciona</a>
-      <a href="#ai-engine">Motor de IA</a>
+      <a href="#agentes">Agentes</a>
+      <a href="#ai-engine">Tecnologia</a>
       <a href="#resultados">Resultados</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-actions">
-      <button id="theme-toggle" class="btn-theme-toggle" aria-label="Alternar tema">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-      <a href="#contato" class="btn-nav" id="nav-cta">Diagnóstico gratuito →</a>
+      <a href="#contato" class="btn-nav" id="nav-cta">Diagnóstico gratuito</a>
     </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ░░ HERO ░░ -->
   <section class="hero" id="hero" aria-labelledby="hero-heading">
-
-    <!-- Canvas 3D full-screen -->
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-    <!-- grid-canvas removido: substituído pelo hero-canvas 3D (hero-engine.js) -->
-
-    <!-- Badge de processamento (aparece ao simular) -->
     <div id="hero-status" role="status" aria-live="polite" aria-atomic="true">
-      🔮 Processando: <span id="hero-status-text"></span>
+      <span id="hero-status-text"></span>
     </div>
 
     <div class="hero-content">
-      <div class="hero-badge" aria-label="Tag">
+      <div class="hero-badge" aria-label="Status">
         <span class="badge-dot"></span>
-        Automação com agentes de IA — entrega em até 21 dias
+        Engenharia de IA para empresas
       </div>
+
       <h1 id="hero-heading" class="hero-title">
-        Potencialize pessoas.<br />
-        <em>Escale seu negócio.</em>
+        O próximo colaborador da sua empresa não será contratado.<br />
+        <em>Será desenvolvido.</em>
       </h1>
+
       <p class="hero-sub">
-        Liberamos líderes e colaboradores do trabalho burocrático e repetitivo.<br class="br-desktop" />
-        A Narosco constrói e integra agentes de IA que cuidam da operação 24/7 para que seu time foque em estratégia,
-        criatividade e relacionamento.
+        Construímos agentes de Inteligência Artificial que executam processos completos, integram seus sistemas e
+        trabalham 24/7 para que sua equipe possa focar no que realmente importa.
       </p>
+
       <div class="hero-ctas">
         <a href="#contato" class="btn-primary" id="hero-cta-primary">
-          Ver quais processos posso automatizar
+          Descobrir o que posso automatizar
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </a>
-        <!-- Linha de simulação interativa -->
-        <div class="hero-sim-row">
-          <input type="text" id="hero-sim-input" placeholder="Ex: triagem de suporte, follow-up de vendas..."
-            maxlength="50" aria-label="Digite o processo para simular no motor de IA" />
-          <button id="hero-sim-btn" type="button" aria-label="Disparar simulação">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            Ver o agente
-          </button>
-        </div>
+        <a href="#ai-engine" class="btn-secondary" id="hero-cta-secondary">
+          Ver como funciona
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
       </div>
-      <div class="hero-stats" aria-label="Resultados médios dos clientes Narosco">
-        <div class="stat">
-          <span class="stat-num" data-target="340">0</span><span class="stat-unit">h</span>
-          <span class="stat-label">de trabalho manual eliminadas por mês</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="94">0</span><span class="stat-unit">%</span>
-          <span class="stat-label">menos erros operacionais</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="21">0</span><span class="stat-unit">dias</span>
-          <span class="stat-label">do diagnóstico ao primeiro agente em produção</span>
-        </div>
+
+      <div class="hero-process-badge">
+        <span>Diagnóstico</span>
+        <span class="sep">→</span>
+        <span>Construção</span>
+        <span class="sep">→</span>
+        <span>Deploy</span>
+        <span class="sep">·</span>
+        <span>Primeiro agente em até 21 dias</span>
       </div>
     </div>
   </section>
 
-  <!-- ░░ PROBLEMA ░░ -->
-  <section class="problem" id="problema" aria-labelledby="problem-heading">
+  <!-- ░░ O PROBLEMA ░░ -->
+  <section class="problem section-padding" id="problema" aria-labelledby="problem-heading">
     <div class="container">
-      <div class="section-tag">Por que automatizar agora</div>
-      <h2 id="problem-heading" class="section-title">
-        Cada hora gasta em tarefa repetitiva<br />
-        <span class="highlight">é receita que o seu concorrente está capturando</span>
+      <div class="section-tag">O desperdício silencioso</div>
+      <h2 id="problem-heading" class="problem-headline">
+        Sua equipe não deveria estar <span class="highlight">fazendo isso.</span>
       </h2>
-      <div class="pain-grid">
-        <div class="pain-card" id="pain-1">
-          <div class="pain-icon">🧠</div>
-          <h3>Talento desperdiçado em rotinas automáticas</h3>
-          <p>Profissionais qualificados gastam horas copiando dados, preenchendo CRM e gerando relatórios em vez de
-            inovar e criar soluções para os clientes.</p>
-        </div>
-        <div class="pain-card" id="pain-2">
-          <div class="pain-icon">🚀</div>
-          <h3>Crescimento sem sobrecarregar a equipe</h3>
-          <p>Expandir o negócio não precisa significar estresse e acúmulo de horas extras. Agentes de IA absorvem o
-            volume de trabalho operacional para que o time cresça com qualidade de vida.</p>
-        </div>
-        <div class="pain-card" id="pain-3">
-          <div class="pain-icon">🎯</div>
-          <h3>Foco nas qualidades humanas únicas</h3>
-          <p>Agentes garantem precisão em dados, prazos e rotinas. Seu time fica livre para aplicar empatia, poder de
-            negociação e visão estratégica onde mais importa.</p>
-        </div>
-        <div class="pain-card" id="pain-4">
-          <div class="pain-icon">🌱</div>
-          <h3>Evolução de todo o ecossistema</h3>
-          <p>O dono ganha previsibilidade e escala; a equipe ganha valorização e autonomia para assumir papéis
-            estratégicos dentro da empresa.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <p class="problem-sub">
+        Profissionais qualificados gastam horas do dia em tarefas que máquinas já conseguem executar com mais velocidade
+        e precisão.
+      </p>
 
-  <!-- ░░ MANIFESTO / O NOVO PARADIGMA ░░ -->
-  <section class="manifesto" id="manifesto" aria-labelledby="manifesto-heading">
-    <div class="container">
-      <div class="manifesto-box">
-        <div class="manifesto-tag">A evolução do ecossistema de trabalho</div>
-        <h2 id="manifesto-heading" class="manifesto-title">
-          A IA cuida da repetição.<br />
-          <span class="highlight-dark">As pessoas constroem o futuro.</span>
-        </h2>
-        <p class="manifesto-text">
-          Agentes de IA não existem para substituir talentos, mas para <strong>multiplicar o potencial das
-            pessoas</strong>.
-          Quando livramos proprietários e colaboradores da burocracia diária, criamos um ambiente próspero onde todos
-          evoluem juntos: a empresa ganha escala e eficiência, e as pessoas ganham espaço para brilhar em suas aptidões
-          únicas.
+      <div class="tasks-grid" aria-label="Tarefas repetitivas que consomem tempo">
+        <div class="task-item"><span class="task-x">×</span> Copiar dados entre sistemas</div>
+        <div class="task-item"><span class="task-x">×</span> Responder perguntas repetidas</div>
+        <div class="task-item"><span class="task-x">×</span> Atualizar CRM manualmente</div>
+        <div class="task-item"><span class="task-x">×</span> Gerar relatórios operacionais</div>
+        <div class="task-item"><span class="task-x">×</span> Procurar informações em sistemas</div>
+        <div class="task-item"><span class="task-x">×</span> Fazer follow-up de vendas</div>
+        <div class="task-item"><span class="task-x">×</span> Conferir pedidos e estoque</div>
+        <div class="task-item"><span class="task-x">×</span> Enviar emails de rotina</div>
+        <div class="task-item"><span class="task-x">×</span> Alimentar planilhas</div>
+      </div>
+
+      <div class="problem-statement">
+        <p>
+          Empresas não perdem produtividade por falta de talento.<br />
+          Perdem produtividade porque <strong>talento demais é utilizado para trabalho que máquinas já conseguem
+            executar.</strong>
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ░░ SOLUÇÃO / COMO FUNCIONA ░░ -->
-  <section class="how-it-works" id="como-funciona" aria-labelledby="solution-heading">
+  <!-- ░░ A TRANSFORMAÇÃO ░░ -->
+  <section class="transformation section-padding" id="transformacao" aria-labelledby="transform-heading">
     <div class="container">
-      <div class="section-tag">Como funciona a automação com agentes de IA</div>
-      <h2 id="solution-heading" class="section-title">
-        Do diagnóstico ao agente em produção<br />
-        <span class="highlight">em até 21 dias úteis</span>
+      <div class="section-tag">A nova camada operacional</div>
+      <h2 id="transform-heading" class="section-title">
+        Uma nova camada operacional <span class="highlight">para sua empresa.</span>
       </h2>
-      <div class="steps-grid">
-        <div class="step" id="step-1">
-          <div class="step-num">01</div>
-          <h3>Diagnóstico de automação</h3>
-          <p>Em uma sessão de 30 minutos, mapeamos seus processos e identificamos os fluxos com maior ROI para
-            automatizar primeiro.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">→</div>
-        <div class="step" id="step-2">
-          <div class="step-num">02</div>
-          <h3>Construção sob medida</h3>
-          <p>Desenvolvemos o agente customizado para o seu contexto e o integramos às ferramentas que você já usa — sem
-            substituir nada.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">→</div>
-        <div class="step" id="step-3">
-          <div class="step-num">03</div>
-          <h3>Produção contínua</h3>
-          <p>O agente entra em operação. Monitoramos 24h, ajustamos com base nos dados reais e evoluímos o sistema junto
-            com o seu negócio.</p>
-        </div>
-      </div>
+      <p class="section-subtitle">
+        A NAROSCO não exige substituir seu stack atual. Integramos uma camada inteligente entre as pessoas e os sistemas
+        que a empresa já utiliza.
+      </p>
 
-      <!-- Use cases -->
-      <div class="use-cases" aria-label="Processos automatizados com agentes de IA">
-        <h3 class="use-cases-title">Processos que nossos agentes já executam</h3>
-        <div class="use-cases-grid">
-          <div class="use-case-item" id="uc-1">
-            <span class="uc-icon">🤖</span>
-            <span>Suporte ao cliente 24/7 sem fila</span>
+      <div class="transform-grid">
+        <!-- ANTES -->
+        <div class="transform-card before">
+          <div class="transform-label">Antes</div>
+          <div class="transform-flow">
+            <div class="transform-node"><span class="node-icon">👤</span> Funcionário</div>
+            <div class="transform-node"><span class="node-icon">→</span> Planilha</div>
+            <div class="transform-node"><span class="node-icon">→</span> Email</div>
+            <div class="transform-node"><span class="node-icon">→</span> CRM</div>
+            <div class="transform-node"><span class="node-icon">→</span> ERP</div>
+            <div class="transform-node"><span class="node-icon">→</span> WhatsApp</div>
+            <div class="transform-node"><span class="node-icon">→</span> Relatório</div>
           </div>
-          <div class="use-case-item" id="uc-2">
-            <span class="uc-icon">📊</span>
-            <span>Relatórios e dashboards automáticos</span>
+        </div>
+
+        <!-- Arrow -->
+        <div class="transform-arrow-col" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <!-- DEPOIS -->
+        <div class="transform-card after">
+          <div class="transform-label">Depois</div>
+          <div class="transform-flow">
+            <div class="transform-node"><span class="node-icon">👤</span> Empresa</div>
+            <div class="transform-node"><span class="node-icon">⚡</span> NAROSCO AI Agent</div>
+            <div class="transform-node"><span class="node-icon">↔</span> Todos os sistemas</div>
           </div>
-          <div class="use-case-item" id="uc-3">
-            <span class="uc-icon">📧</span>
-            <span>Follow-up de vendas sem esquecer nenhum lead</span>
-          </div>
-          <div class="use-case-item" id="uc-4">
-            <span class="uc-icon">📦</span>
-            <span>Gestão e rastreamento de pedidos</span>
-          </div>
-          <div class="use-case-item" id="uc-5">
-            <span class="uc-icon">📰</span>
-            <span>Geração de conteúdo e briefings</span>
-          </div>
-          <div class="use-case-item" id="uc-6">
-            <span class="uc-icon">🔍</span>
-            <span>Qualificação e prospecção de leads</span>
-          </div>
-          <div class="use-case-item" id="uc-7">
-            <span class="uc-icon">📅</span>
-            <span>Agendamento e confirmação automática</span>
-          </div>
-          <div class="use-case-item" id="uc-8">
-            <span class="uc-icon">🔗</span>
-            <span>Sincronização entre CRM, ERP e sistemas</span>
+          <div class="transform-note">
+            <strong>O agente funciona como intermediário inteligente</strong> — consulta, decide e executa em todos os
+            sistemas simultaneamente.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ░░ RESULTADOS / SOCIAL PROOF ░░ -->
-  <section class="results" id="resultados" aria-labelledby="results-heading">
+  <!-- ░░ CAPACIDADES ░░ -->
+  <section class="capabilities section-padding" id="capacidades" aria-labelledby="cap-heading">
     <div class="container">
-      <div class="section-tag">Resultados verificáveis dos clientes</div>
-      <h2 id="results-heading" class="section-title">
-        Operações que <span class="highlight">escalam receita sem escalar custo</span>
+      <div class="section-tag">Infraestrutura de IA</div>
+      <h2 id="cap-heading" class="section-title">
+        Não automatizamos tarefas.<br /><span class="highlight">Automatizamos processos.</span>
       </h2>
-      <div class="testimonials-grid">
-        <div class="testimonial" id="test-1">
-          <div class="testimonial-quote">"O agente de follow-up que a Narosco construiu aumentou nossa taxa de conversão
-            em 38% no primeiro mês. O processo que consumia 3h do meu time por dia passou a custo zero — e os leads
-            param de esfriar."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">R</div>
-            <div>
-              <div class="author-name">Rafael M.</div>
-              <div class="author-role">CEO, SaaS B2B — São Paulo</div>
-            </div>
+      <p class="section-subtitle">
+        Cada módulo conecta o agente a uma camada específica da operação da empresa.
+      </p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+            </svg>
           </div>
-          <div class="testimonial-metric">
-            <span class="metric-num">+38%</span>
-            <span class="metric-label">taxa de conversão em 30 dias</span>
-          </div>
+          <h3>AI Agents</h3>
+          <p>Agentes autônomos capazes de executar processos completos de ponta a ponta.</p>
         </div>
-        <div class="testimonial" id="test-2">
-          <div class="testimonial-quote">"Automatizamos todo o onboarding de clientes. O que levava 2 dias de trabalho
-            manual agora acontece em 20 minutos — sem erros, sem e-mail perdido, sem cliente esperando."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">C</div>
-            <div>
-              <div class="author-name">Carla S.</div>
-              <div class="author-role">COO, E-commerce — Rio de Janeiro</div>
-            </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg>
           </div>
-          <div class="testimonial-metric">
-            <span class="metric-num">−96%</span>
-            <span class="metric-label">tempo de onboarding de 2 dias para 20 min</span>
-          </div>
+          <h3>AI + CRM</h3>
+          <p>Qualificação, follow-up, atualização e análise de leads automatizados.</p>
         </div>
-        <div class="testimonial" id="test-3">
-          <div class="testimonial-quote">"Economizamos R$ 40k/mês em custo operacional só com o agente de suporte. Meu
-            time parou de responder ticket e voltou a resolver problema de verdade — o NPS subiu 22 pontos."</div>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">T</div>
-            <div>
-              <div class="author-name">Thiago A.</div>
-              <div class="author-role">Head de Ops, Fintech — Belo Horizonte</div>
-            </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg>
           </div>
-          <div class="testimonial-metric">
-            <span class="metric-num">R$40k</span>
-            <span class="metric-label">economizados/mês em custo operacional</span>
-          </div>
+          <h3>AI + ERP</h3>
+          <p>Consulta e execução de processos operacionais dentro do ERP.</p>
         </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg>
+          </div>
+          <h3>AI + WhatsApp</h3>
+          <p>Atendimento, vendas, suporte e operações via WhatsApp.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+          </div>
+          <h3>AI + Data</h3>
+          <p>Relatórios, análise e tomada de decisão baseada em dados reais.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" />
+            </svg>
+          </div>
+          <h3>AI + Knowledge</h3>
+          <p>RAG, documentos, bases internas e conhecimento empresarial.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+            </svg>
+          </div>
+          <h3>AI + APIs</h3>
+          <p>Integração com qualquer sistema existente via APIs e webhooks.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="8.5" cy="7" r="4" />
+              <path d="M20 8v6M23 11h-6" />
+            </svg>
+          </div>
+          <h3>AI + Human</h3>
+          <p>Human-in-the-loop para decisões críticas que exigem julgamento humano.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ COMO FUNCIONA ░░ -->
+  <section class="how-it-works section-padding" id="como-funciona" aria-labelledby="solution-heading">
+    <div class="container">
+      <div class="section-tag">Processo</div>
+      <h2 id="solution-heading" class="section-title">
+        Do processo ao agente <span class="highlight">em produção.</span>
+      </h2>
+
+      <div class="steps-grid">
+        <div class="step" id="step-1">
+          <div class="step-num">01</div>
+          <h3>Discovery</h3>
+          <p>Mapeamos os processos da sua empresa e identificamos os fluxos com maior potencial de automação e ROI.</p>
+        </div>
+        <div class="step" id="step-2">
+          <div class="step-num">02</div>
+          <h3>Architecture</h3>
+          <p>Projetamos o agente, sua infraestrutura, integrações e regras de negócio sob medida para seu contexto.</p>
+        </div>
+        <div class="step" id="step-3">
+          <div class="step-num">03</div>
+          <h3>Build</h3>
+          <p>Construímos o agente, integramos aos sistemas existentes e validamos com cenários reais do seu negócio.</p>
+        </div>
+        <div class="step" id="step-4">
+          <div class="step-num">04</div>
+          <h3>Deploy</h3>
+          <p>Colocamos em produção, monitoramos 24h e evoluímos com base nos dados reais de operação.</p>
+        </div>
+      </div>
+
+      <div class="steps-timeline">
+        <span class="timeline-badge">7–21 dias</span>
+        <span class="timeline-text">Tempo típico para o primeiro agente em produção</span>
       </div>
     </div>
   </section>
 
   <!-- ░░ AI ENGINE — TRANSFORMER VISUAL ░░ -->
   <section class="ai-engine-section" id="ai-engine" aria-labelledby="ae-heading">
-
-    <!-- Header -->
     <div class="ae-header">
       <div class="ae-section-tag">Motor de Inteligência Artificial
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -395,16 +459,13 @@
         Veja como um agente de IA <span>processa e executa</span><br />seus fluxos em tempo real
       </h2>
       <p class="ae-subtitle">
-        Cada automação passa por três estágios: tokenização do contexto, análise de intenção via Multi-Head Attention
-        e geração da ação executável. É assim que o agente entende o seu negócio — não segue script, raciocina.
+        Cada automação passa por estágios: tokenização do contexto, análise de intenção via Multi-Head Attention e
+        geração da ação executável. O agente não segue script — raciocina.
       </p>
     </div>
 
-    <!-- 3D Canvas -->
     <div class="ae-canvas-wrap">
-      <canvas id="ai-engine-canvas" aria-label="Visualização 3D interativa do motor de IA Transformer"></canvas>
-
-      <!-- HTML Stage Labels (positioned by JS) -->
+      <canvas id="ai-engine-canvas" aria-label="Visualização 3D interativa do motor de IA"></canvas>
       <div id="ai-engine-labels" aria-hidden="true">
         <div class="ae-label" id="ae-lbl-0">
           <div class="ae-label-name">01 — Tokenizador</div>
@@ -419,7 +480,6 @@
           <div class="ae-label-sub">Transforma tokens em conhecimento</div>
         </div>
       </div>
-
       <div class="ae-drag-hint" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path
@@ -430,12 +490,10 @@
       </div>
     </div>
 
-    <!-- User Input -->
     <div class="ae-controls">
       <span class="ae-controls-label">Teste com um processo do seu negócio</span>
       <div class="ae-input-row">
-        <input type="text" id="ae-input"
-          placeholder="Ex: triagem de suporte, onboarding de clientes, follow-up de vendas..."
+        <input type="text" id="ae-input" placeholder="Ex: triagem de suporte, follow-up de vendas, onboarding..."
           aria-label="Digite o processo a ser automatizado" maxlength="60" />
         <button id="ae-trigger" aria-label="Disparar simulação">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -448,40 +506,426 @@
       <span id="ae-active-label" aria-live="polite"></span>
     </div>
 
-    <!-- Stage Info Cards -->
     <div class="ae-stages-strip" role="list" aria-label="Estágios do Transformer">
       <div class="ae-stage-card" role="listitem" id="ae-card-1">
         <div class="ae-stage-num">Estágio 01</div>
-        <span class="ae-stage-icon" aria-hidden="true">⭕</span>
-        <div class="ae-stage-name">Tokenizador (Anel)</div>
-        <p class="ae-stage-desc">O anel fragmenta o texto de entrada em unidades mínimas de significado — os "tokens".
-          Cada rotação processa um pedaço do seu contexto.</p>
+        <div class="ae-stage-name">Tokenizador</div>
+        <p class="ae-stage-desc">Fragmenta o texto de entrada em unidades mínimas de significado — os tokens. Cada
+          rotação processa um pedaço do contexto.</p>
       </div>
       <div class="ae-stage-card" role="listitem" id="ae-card-2">
         <div class="ae-stage-num">Estágio 02</div>
-        <span class="ae-stage-icon" aria-hidden="true">💎</span>
-        <div class="ae-stage-name">Núcleo de Atenção (Icosaedro)</div>
-        <p class="ae-stage-desc">O icosaedro com satélites orbitais representa as Multi-Head Attention: múltiplas
-          "cabeças" analisando relações entre tokens simultaneamente.</p>
+        <div class="ae-stage-name">Núcleo de Atenção</div>
+        <p class="ae-stage-desc">Múltiplas "cabeças de atenção" analisam relações entre tokens simultaneamente,
+          identificando padrões e intenções.</p>
       </div>
       <div class="ae-stage-card" role="listitem" id="ae-card-3">
         <div class="ae-stage-num">Estágio 03</div>
-        <span class="ae-stage-icon" aria-hidden="true">🏛️</span>
-        <div class="ae-stage-name">Feed-Forward (Pilar)</div>
-        <p class="ae-stage-desc">O pilar cilíndrico empilha e transforma os tokens pós-atenção em conhecimento
-          estruturado — a base de cada decisão do agente.</p>
+        <div class="ae-stage-name">Feed-Forward</div>
+        <p class="ae-stage-desc">Transforma tokens pós-atenção em conhecimento estruturado — a base para cada decisão
+          e ação do agente.</p>
       </div>
     </div>
+  </section>
 
+  <!-- ░░ COLABORADORES DIGITAIS ░░ -->
+  <section class="agents section-padding" id="agentes" aria-labelledby="agents-heading">
+    <div class="container">
+      <div class="section-tag">Colaboradores digitais</div>
+      <h2 id="agents-heading" class="section-title">
+        Agentes que executam <span class="highlight">processos completos.</span>
+      </h2>
+      <p class="section-subtitle">
+        Cada agente é projetado para um contexto específico da operação da empresa.
+      </p>
+
+      <div class="agents-grid">
+        <div class="agent-card">
+          <div class="agent-type">Sales Agent</div>
+          <h3>Prospecção e Vendas</h3>
+          <div class="agent-flow">
+            <span class="agent-flow-step">Encontra leads</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Qualifica</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Registra CRM</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Follow-up</span>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-type">Support Agent</div>
+          <h3>Atendimento e Suporte</h3>
+          <div class="agent-flow">
+            <span class="agent-flow-step">Recebe solicitação</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Entende contexto</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Resolve</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Escala</span>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-type">Operations Agent</div>
+          <h3>Processos Operacionais</h3>
+          <div class="agent-flow">
+            <span class="agent-flow-step">Recebe pedido</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Consulta ERP</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Valida regras</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Executa</span>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-type">Finance Agent</div>
+          <h3>Financeiro e Relatórios</h3>
+          <div class="agent-flow">
+            <span class="agent-flow-step">Analisa dados</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Identifica anomalias</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Gera relatório</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Alerta</span>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-type">Executive Agent</div>
+          <h3>Inteligência Executiva</h3>
+          <div class="agent-flow">
+            <span class="agent-flow-step">Consolida dados</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Analisa indicadores</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Identifica problemas</span>
+            <span class="agent-flow-arrow">→</span>
+            <span class="agent-flow-step">Briefing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CASE STUDIES (Placeholder) ░░ -->
+  <section class="case-studies section-padding" id="resultados" aria-labelledby="cases-heading">
+    <div class="container">
+      <div class="section-tag">Resultados</div>
+      <h2 id="cases-heading" class="section-title">
+        Resultados reais de <span class="highlight">operações automatizadas.</span>
+      </h2>
+
+      <div class="case-placeholder">
+        <div class="case-placeholder-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 20V10M12 20V4M6 20v-6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <p class="section-subtitle mx-auto" style="text-align:center; margin-bottom: 1rem;">
+          Estamos documentando os resultados dos primeiros clientes.<br />
+          Em breve, cada caso será publicado com dados reais de impacto operacional.
+        </p>
+        <div class="case-structure">
+          <div class="case-structure-item">Problema</div>
+          <div class="case-structure-item">Processo</div>
+          <div class="case-structure-item">Agente</div>
+          <div class="case-structure-item">Integrações</div>
+          <div class="case-structure-item">Resultado</div>
+          <div class="case-structure-item">ROI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ TECNOLOGIA + SEGURANÇA ░░ -->
+  <section class="technology section-padding" id="tecnologia" aria-labelledby="tech-heading">
+    <div class="container">
+      <div class="section-tag">Profundidade técnica</div>
+      <h2 id="tech-heading" class="section-title">
+        Engenharia por trás <span class="highlight">da IA.</span>
+      </h2>
+
+      <div class="tech-split">
+        <!-- Tecnologias -->
+        <div class="tech-block">
+          <h3>Stack de engenharia</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">LLMs</span>
+            <span class="tech-tag">RAG</span>
+            <span class="tech-tag">AI Agents</span>
+            <span class="tech-tag">MCP</span>
+            <span class="tech-tag">Vector Search</span>
+            <span class="tech-tag">APIs</span>
+            <span class="tech-tag">Webhooks</span>
+            <span class="tech-tag">Event-Driven</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Redis</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">Observability</span>
+          </div>
+        </div>
+
+        <!-- Segurança -->
+        <div class="tech-block">
+          <h3>IA empresarial precisa ser confiável</h3>
+          <div class="security-list">
+            <div class="security-item">
+              <span class="security-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0110 0v4" />
+                </svg>
+              </span>
+              <span>Criptografia em trânsito e em repouso para todos os dados</span>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </span>
+              <span>Logs e observabilidade completa de cada ação do agente</span>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </span>
+              <span>Isolamento de dados e controle de acesso granular</span>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="8.5" cy="7" r="4" />
+                  <path d="M20 8v6M23 11h-6" />
+                </svg>
+              </span>
+              <span>Human-in-the-loop para decisões críticas e auditoria</span>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="8" rx="2" />
+                  <rect x="2" y="14" width="20" height="8" rx="2" />
+                  <circle cx="6" cy="6" r="1" />
+                  <circle cx="6" cy="18" r="1" />
+                </svg>
+              </span>
+              <span>Deploy em infraestrutura própria (AWS, Azure, GCP) quando necessário</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ ROI CALCULATOR ░░ -->
+  <section class="roi-section section-padding" id="roi" aria-labelledby="roi-heading">
+    <div class="container">
+      <div class="section-tag">Estimativa de impacto</div>
+      <h2 id="roi-heading" class="section-title">
+        Quanto sua operação <span class="highlight">pode economizar.</span>
+      </h2>
+      <p class="section-subtitle" style="margin-bottom: 2rem;">
+        Estimativa baseada nos dados que você fornecer. Resultados reais dependem da complexidade do processo.
+      </p>
+
+      <div class="roi-card">
+        <div class="roi-inputs">
+          <div class="roi-field">
+            <label for="roi-people">Funcionários envolvidos no processo</label>
+            <input type="range" id="roi-people" min="1" max="50" value="5" />
+            <div class="roi-value" id="roi-people-val">5 pessoas</div>
+          </div>
+          <div class="roi-field">
+            <label for="roi-hours">Horas semanais gastas por pessoa</label>
+            <input type="range" id="roi-hours" min="1" max="40" value="10" />
+            <div class="roi-value" id="roi-hours-val">10 horas/semana</div>
+          </div>
+          <div class="roi-field">
+            <label for="roi-cost">Custo médio por hora (R$)</label>
+            <input type="range" id="roi-cost" min="20" max="300" value="80" step="10" />
+            <div class="roi-value" id="roi-cost-val">R$ 80/hora</div>
+          </div>
+        </div>
+        <div class="roi-results">
+          <div class="roi-result-item">
+            <div class="roi-result-label">Horas desperdiçadas / mês</div>
+            <div class="roi-result-value" id="roi-res-hours">200h</div>
+          </div>
+          <div class="roi-result-item">
+            <div class="roi-result-label">Custo mensal estimado</div>
+            <div class="roi-result-value" id="roi-res-monthly">R$ 16.000</div>
+          </div>
+          <div class="roi-result-item">
+            <div class="roi-result-label">Custo anual</div>
+            <div class="roi-result-value" id="roi-res-annual">R$ 192.000</div>
+          </div>
+          <a href="#contato" class="btn-primary" style="margin-top: 8px; text-align:center; justify-content:center;">
+            Calcular o potencial da minha operação
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <p class="roi-disclaimer">* Valores são estimativas. A economia real depende do processo específico e do grau de
+        automação alcançado.</p>
+    </div>
+  </section>
+
+  <!-- ░░ SOBRE + METODOLOGIA ░░ -->
+  <section class="about section-padding" id="sobre" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="section-tag">Sobre a NAROSCO</div>
+      <h2 id="about-heading" class="section-title">
+        Construímos tecnologia para <span class="highlight">devolver tempo às pessoas.</span>
+      </h2>
+
+      <div class="about-story">
+        <p>
+          A NAROSCO nasceu da ideia de que inteligência artificial não deveria apenas responder perguntas. Ela deveria
+          <strong>entender, decidir e executar.</strong>
+        </p>
+        <p>
+          Combinamos engenharia de software, inteligência artificial e automação para transformar processos
+          empresariais.
+          Cada agente que construímos é projetado para operar com a autonomia de um profissional e a precisão de uma
+          máquina.
+        </p>
+        <p>
+          A IA cuida da repetição. <strong>As pessoas constroem o futuro.</strong>
+        </p>
+      </div>
+
+      <div class="methodology-title">NAROSCO AI Operating System</div>
+      <div class="methodology-grid">
+        <div class="method-step">
+          <div class="method-num">01</div>
+          <div class="method-name">Discover</div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">02</div>
+          <div class="method-name">Map</div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">03</div>
+          <div class="method-name">Architect</div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">04</div>
+          <div class="method-name">Build</div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">05</div>
+          <div class="method-name">Deploy</div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">06</div>
+          <div class="method-name">Optimize</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CTA FINAL + FORM ░░ -->
+  <section class="contact section-padding" id="contato" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-content">
+          <div class="section-tag">Próximo passo</div>
+          <h2 id="contact-heading">
+            Qual processo você gostaria que sua empresa <span class="highlight">nunca mais precisasse fazer
+              manualmente?</span>
+          </h2>
+          <p class="contact-sub">
+            Em 30 minutos, encontramos os processos com maior potencial de automação e estimamos o impacto operacional.
+            Sem compromisso.
+          </p>
+          <ul class="contact-benefits" aria-label="O que você recebe no diagnóstico">
+            <li><span class="check">✓</span> Mapeamento dos processos com maior potencial de automação</li>
+            <li><span class="check">✓</span> Estimativa de horas e custo economizados por mês</li>
+            <li><span class="check">✓</span> Proposta personalizada com prazo e escopo definidos</li>
+          </ul>
+        </div>
+
+        <form class="contact-form" id="lead-form" novalidate aria-label="Formulário de agendamento do diagnóstico">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" placeholder="João Silva" autocomplete="name" required
+                aria-required="true" />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail profissional</label>
+              <input type="email" id="email" name="email" placeholder="joao@empresa.com" autocomplete="email" required
+                aria-required="true" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="company">Empresa</label>
+              <input type="text" id="company" name="company" placeholder="Nome da empresa"
+                autocomplete="organization" />
+            </div>
+            <div class="form-group">
+              <label for="role">Cargo</label>
+              <input type="text" id="role" name="role" placeholder="CEO, CTO, Head de Ops..."
+                autocomplete="organization-title" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="process">Qual processo deseja automatizar?</label>
+            <select id="process" name="process" required aria-required="true">
+              <option value="" disabled selected>Selecione a área prioritária</option>
+              <option value="atendimento">Atendimento e suporte ao cliente</option>
+              <option value="vendas">Prospecção, follow-up e fechamento</option>
+              <option value="operacoes">Operações e processos internos</option>
+              <option value="financeiro">Financeiro, relatórios e BI</option>
+              <option value="marketing">Marketing, conteúdo e social</option>
+              <option value="outro">Outro processo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="team-size">Tamanho aproximado da equipe</label>
+            <select id="team-size" name="team_size">
+              <option value="" disabled selected>Selecione</option>
+              <option value="1-10">1–10 pessoas</option>
+              <option value="11-50">11–50 pessoas</option>
+              <option value="51-200">51–200 pessoas</option>
+              <option value="200+">200+ pessoas</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-submit" id="form-submit">
+            Agendar diagnóstico gratuito
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <p class="form-note">Dados protegidos com criptografia. Sem spam.</p>
+        </form>
+      </div>
+    </div>
   </section>
 
   <!-- ░░ FAQ ░░ -->
-  <section class="faq" id="faq" aria-labelledby="faq-heading">
+  <section class="faq section-padding" id="faq" aria-labelledby="faq-heading">
     <div class="container container-narrow">
-      <div class="section-tag">Perguntas frequentes sobre automação com IA</div>
+      <div class="section-tag">Perguntas frequentes</div>
       <h2 id="faq-heading" class="section-title">
-        O que empresas perguntam antes de <span class="highlight">automatizar com agentes de IA</span>
+        O que empresas perguntam antes de <span class="highlight">automatizar com agentes de IA.</span>
       </h2>
+
       <div class="faq-list" role="list">
         <div class="faq-item" id="faq-1" role="listitem">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-btn-1">
@@ -494,14 +938,13 @@
           <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
             <p>Um agente de IA é um sistema autônomo que percebe contexto, raciocina e executa ações — como um
               colaborador digital que nunca dorme. Diferente de automações if-then tradicionais (Zapier, Make), agentes
-              tomam decisões complexas, lidam com exceções e se adaptam a situações novas sem intervenção humana. O
-              resultado prático: processos que antes precisavam de supervisão constante passam a rodar de forma
-              completamente autônoma.</p>
+              tomam decisões complexas, lidam com exceções e se adaptam a situações novas sem intervenção humana.</p>
           </div>
         </div>
+
         <div class="faq-item" id="faq-2" role="listitem">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-btn-2">
-            Preciso ter equipe técnica ou saber programar para contratar a Narosco?
+            Preciso ter equipe técnica ou saber programar?
             <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round" />
@@ -509,11 +952,10 @@
           </button>
           <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
             <p>Não. Você descreve o processo que quer automatizar em linguagem comum — nós cuidamos de 100% da
-              implementação técnica. Diagnóstico, arquitetura, construção, integração, testes e deploy são feitos pela
-              nossa equipe. Você recebe o agente funcionando, com painel de monitoramento, sem precisar escrever uma
-              linha de código.</p>
+              implementação técnica. Diagnóstico, arquitetura, construção, integração, testes e deploy.</p>
           </div>
         </div>
+
         <div class="faq-item" id="faq-3" role="listitem">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-btn-3">
             Em quanto tempo o agente entra em produção?
@@ -524,11 +966,10 @@
           </button>
           <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
             <p>A maioria dos agentes entra em produção entre 7 e 21 dias após o diagnóstico inicial. Fluxos com
-              múltiplas integrações ou regras de negócio complexas podem levar até 30 dias. O prazo é sempre alinhado
-              antes de começar — sem surpresas. Nossos clientes costumam ver o primeiro resultado operacional ainda na
-              primeira semana de deploy.</p>
+              múltiplas integrações ou regras de negócio complexas podem levar até 30 dias.</p>
           </div>
         </div>
+
         <div class="faq-item" id="faq-4" role="listitem">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" id="faq-btn-4">
             Quais ferramentas e sistemas o agente consegue integrar?
@@ -539,11 +980,11 @@
           </button>
           <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-btn-4">
             <p>Qualquer sistema com API: HubSpot, Salesforce, Notion, Google Workspace, Slack, WhatsApp Business,
-              Pipedrive, Shopify, ERPs (TOTVS, SAP, Omie) e centenas de outras ferramentas. Também conseguimos integrar
-              sistemas legados via webhooks e conectores customizados. Se o sistema existe digitalmente, conseguimos
-              conectar o agente a ele.</p>
+              Pipedrive, Shopify, ERPs (TOTVS, SAP, Omie) e centenas de outras ferramentas. Também conectamos sistemas
+              legados via webhooks e conectores customizados.</p>
           </div>
         </div>
+
         <div class="faq-item" id="faq-5" role="listitem">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5" id="faq-btn-5">
             Os dados da minha empresa ficam seguros com o agente?
@@ -553,72 +994,42 @@
             </svg>
           </button>
           <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-btn-5">
-            <p>Sim. Todos os dados trafegam com criptografia em trânsito e em repouso. Seguimos práticas de segurança
-              padrão de mercado (SOC 2 referência). Se precisar de controle total, hospedamos a solução inteiramente na
-              sua infraestrutura — AWS, Azure ou GCP — sem que nenhum dado passe pelos nossos servidores.</p>
+            <p>Sim. Todos os dados trafegam com criptografia em trânsito e em repouso. Se precisar de controle total,
+              hospedamos a solução inteiramente na sua infraestrutura — AWS, Azure ou GCP — sem que nenhum dado passe
+              pelos nossos servidores.</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ░░ CTA FORM ░░ -->
-  <section class="contact" id="contato" aria-labelledby="contact-heading">
-    <div class="container container-narrow">
-      <div class="contact-card">
-        <div class="contact-content">
-          <div class="section-tag">Próximo passo — sem compromisso</div>
-          <h2 id="contact-heading" class="section-title no-margin-top">
-            Descubra em 30 minutos<br />
-            <span class="highlight">quanto você está perdendo por não automatizar</span>
-          </h2>
-          <p class="contact-sub">Diagnóstico gratuito e sem compromisso. Em 30 minutos você sai sabendo exatamente quais
-            processos automatizar primeiro, quanto tempo isso libera por mês e qual é o ROI estimado — antes de gastar
-            R$1.</p>
-          <ul class="contact-benefits" aria-label="O que você recebe no diagnóstico gratuito">
-            <li>✓ Mapeamento dos seus processos com maior potencial de automação</li>
-            <li>✓ Estimativa de horas e custo economizados por mês</li>
-            <li>✓ Proposta personalizada com prazo e escopo definidos</li>
-          </ul>
-        </div>
-        <form class="contact-form" id="lead-form" novalidate
-          aria-label="Formulário de agendamento do diagnóstico gratuito">
-          <div class="form-group">
-            <label for="name">Seu nome</label>
-            <input type="text" id="name" name="name" placeholder="João Silva" autocomplete="name" required
-              aria-required="true" />
-          </div>
-          <div class="form-group">
-            <label for="email">E-mail profissional</label>
-            <input type="email" id="email" name="email" placeholder="joao@empresa.com" autocomplete="email" required
-              aria-required="true" />
-          </div>
-          <div class="form-group">
-            <label for="company">Empresa</label>
-            <input type="text" id="company" name="company" placeholder="Nome da sua empresa"
-              autocomplete="organization" />
-          </div>
-          <div class="form-group">
-            <label for="process">Qual área você quer automatizar primeiro?</label>
-            <select id="process" name="process" required aria-required="true">
-              <option value="" disabled selected>Selecione a área prioritária</option>
-              <option value="atendimento">Atendimento e suporte ao cliente</option>
-              <option value="vendas">Prospecção, follow-up e fechamento</option>
-              <option value="operacoes">Operações e processos internos</option>
-              <option value="marketing">Marketing, conteúdo e social</option>
-              <option value="financeiro">Financeiro, relatórios e BI</option>
-              <option value="outro">Outro processo</option>
-            </select>
-          </div>
-          <button type="submit" class="btn-submit" id="form-submit">
-            Agendar diagnóstico gratuito agora
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        <div class="faq-item" id="faq-6" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6" id="faq-btn-6">
+            Qual a diferença entre a NAROSCO e ferramentas como Zapier ou Make?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
           </button>
-          <p class="form-note">🔒 Dados protegidos com criptografia. Sem spam, nunca.</p>
-        </form>
+          <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-btn-6">
+            <p>Zapier e Make executam regras pré-definidas: se X acontecer, faça Y. Agentes de IA compreendem contexto,
+              raciocinam sobre situações novas e tomam decisões dentro de parâmetros definidos. É a diferença entre um
+              fluxograma e um profissional pensando.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-7" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-7" id="faq-btn-7">
+            A IA vai substituir meus funcionários?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-btn-7">
+            <p>Não. Agentes de IA eliminam trabalho repetitivo e burocrático. Seus profissionais passam a focar em
+              atividades estratégicas, criativas e de relacionamento — onde o talento humano é insubstituível. A IA
+              cuida
+              da repetição. As pessoas constroem o futuro.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -627,29 +1038,30 @@
   <footer class="footer" aria-label="Rodapé">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="/" class="nav-logo" aria-label="Narosco">
-          <img src="/assets/images/logo-light.svg" alt="Narosco" class="logo-img theme-light-only" />
-          <img src="/assets/images/logo-dark.svg" alt="Narosco" class="logo-img theme-dark-only" />
+        <a href="/" class="nav-logo" aria-label="NAROSCO">
+          <img src="/assets/images/logo-light.svg" alt="NAROSCO" class="logo-img" />
         </a>
-        <p>Agentes de IA que automatizam processos e eliminam trabalho manual.<br />Do diagnóstico ao deploy em até 21
-          dias.</p>
+        <p>Agentes de IA que automatizam processos empresariais, integram sistemas e executam operações
+          24/7.<br />Do diagnóstico ao deploy em até 21 dias.</p>
       </div>
       <div class="footer-links">
         <div>
           <h4>Produto</h4>
           <a href="#como-funciona">Como funciona</a>
+          <a href="#agentes">Agentes</a>
+          <a href="#ai-engine">Tecnologia</a>
           <a href="#resultados">Resultados</a>
           <a href="#faq">FAQ</a>
         </div>
         <div>
           <h4>Contato</h4>
           <a href="mailto:contato@narosco.com">contato@narosco.com</a>
+          <a href="#contato">Agendar diagnóstico</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Narosco Agentes de IA. Todos os direitos reservados.</p>
-      <p class="footer-updated">Atualizado em: junho 2025</p>
+      <p>© 2026 NAROSCO. Todos os direitos reservados.</p>
     </div>
   </footer>
 
@@ -669,11 +1081,11 @@
   <script>
     window.NaroscoChatConfig = {
       webhookUrl: 'https://renovator-zebra-poach.ngrok-free.dev/webhook-test/clinic-chat',
-      clinicName: 'Narosco',
+      clinicName: 'NAROSCO',
       agentName: 'Ana',
-      agentEmoji: '🤖',
-      primaryColor: '#FF5500', // Narosco brand color
-      welcomeMessage: 'Olá! Sou o assistente da Narosco. Posso te ajudar a entender quais processos do seu negócio têm maior potencial de automação com agentes de IA — quer começar?'
+      agentEmoji: '⚡',
+      primaryColor: '#FF5500',
+      welcomeMessage: 'Olá! Sou o assistente da NAROSCO. Posso te ajudar a entender quais processos do seu negócio têm maior potencial de automação com agentes de IA — quer começar?'
     };
   </script>
   <script src="chat-widget/chat.js"></script>
@@ -691,7 +1103,6 @@
       }
     })(20);
   </script>
-  <!-- Hero 3D Engine — ES module (usa importmap three) -->
   <script type="module" src="hero-engine.js"></script>
 </body>
 
