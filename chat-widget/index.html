@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- ══ SECURITY HEADERS ══════════════════════════════════════════════════
+    [M1] Content Security Policy
+    Produção: troque 'connect-src *' pelo domínio exato do n8n/webhook:
+              connect-src https://seu-n8n.clinicaexemplo.com.br;
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'none';
+          script-src  'self' 'unsafe-inline';
+          style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
+          font-src    https://fonts.gstatic.com;
+          connect-src *;
+          img-src     'self' data:;
+          frame-ancestors 'none';
+        ">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Demo do Agente de Atendimento de Clínicas — Narosco AI">
+  <title>Demo — Agente de Atendimento Clínica | Narosco</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chat Widget CSS -->
+  <link rel="stylesheet" href="chat.css">
+
+  <style>
+    /* ── Demo Page Styles ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0a0f2e 0%, #1a1a4e 40%, #0d2060 100%);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Grid de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26, 107, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 107, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Header ── */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 64px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1a6bff, #4f8bff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .logo-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff, #8ab4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26, 107, 255, 0.15);
+      border: 1px solid rgba(26, 107, 255, 0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #8ab4ff;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge span { font-size: 14px; }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #1a6bff, #00c896);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1a6bff, #4f8bff);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px rgba(26, 107, 255, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(26, 107, 255, 0.4);
+    }
+
+    /* ── Features ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 16px;
+      padding: 24px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(26, 107, 255, 0.08);
+      border-color: rgba(26, 107, 255, 0.25);
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.55;
+    }
+
+    /* ── Exemplo de perguntas ── */
+    .questions-section {
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #1a6bff;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 24px;
+    }
+
+    .questions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .question-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .question-chip:hover {
+      background: rgba(26, 107, 255, 0.15);
+      border-color: rgba(26, 107, 255, 0.4);
+      color: #8ab4ff;
+    }
+
+    /* ── Como integrar ── */
+    .code-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 40px;
+    }
+
+    .code-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .code-section p {
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    code {
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      color: #e6edf3;
+    }
+
+    .token-comment { color: #6e7681; }
+    .token-string  { color: #a5d6ff; }
+    .token-key     { color: #79c0ff; }
+    .token-value   { color: #aff5b4; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #1a6bff;
+      text-decoration: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container { padding: 40px 16px; }
+      h1 { letter-spacing: -1px; }
+      .code-section { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Logo -->
+  <nav class="logo">
+    <div class="logo-mark">⚡</div>
+    <span class="logo-name">Narosco AI</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>🤖</span> AGENTE DE ATENDIMENTO — DEMO
+    </div>
+    <h1>Atendimento inteligente<br>para <em>clínicas brasileiras</em></h1>
+    <p class="hero-desc">
+      Responde dúvidas sobre planos, preços e agenda consultas —
+      24h por dia, no jeito que o paciente brasileiro fala.
+    </p>
+    <button class="hero-cta" onclick="NaroscoChat.open()">
+      💬 Testar o chat agora
+    </button>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature-card">
+      <span class="feature-icon">💳</span>
+      <div class="feature-title">Verifica planos de saúde</div>
+      <div class="feature-desc">Unimed, Bradesco, HappyVida, SulAmérica e mais. Aceita qualquer grafia.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <div class="feature-title">Informa preços</div>
+      <div class="feature-desc">Tabela de especialidades e consultas particulares sempre atualizada.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <div class="feature-title">Qualifica e agenda</div>
+      <div class="feature-desc">Coleta nome, telefone, plano e especialidade. Notifica a equipe em tempo real.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚨</span>
+      <div class="feature-title">Escala urgências</div>
+      <div class="feature-desc">Detecta emergências e aciona a equipe humana imediatamente.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🇧🇷</span>
+      <div class="feature-title">Linguagem 100% BR</div>
+      <div class="feature-desc">"Tô com dor", "tem vaga?", "meu convênio" — entende tudo naturalmente.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔁</span>
+      <div class="feature-title">Memória de conversa</div>
+      <div class="feature-desc">Mantém contexto por toda a sessão. Não esquece o que foi dito.</div>
+    </div>
+  </section>
+
+  <!-- Exemplos de perguntas -->
+  <section class="questions-section">
+    <div class="section-label">Perguntas de exemplo</div>
+    <h2 class="section-title">Clique e teste uma pergunta</h2>
+    <div class="questions-grid">
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Vocês aceitam Unimed?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Tem convênio com Bradesco?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Trabalham com HappyVida?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Quanto custa uma consulta?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Qual o preço do cardiologista?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Tem dermato disponível?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Quero marcar uma consulta</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Qual o horário de funcionamento?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Preciso de check-up, como faço?</button>
+      <button class="question-chip" onclick="testQuestion(this.textContent)">Não tenho plano, aceita particular?</button>
+    </div>
+  </section>
+
+  <!-- Como integrar -->
+  <section class="code-section">
+    <h2>Como integrar no seu site</h2>
+    <p>Adicione 3 linhas ao HTML do seu site. Pronto.</p>
+    <pre><code><span class="token-comment">&lt;!-- 1. Configure o widget --&gt;</span>
+&lt;script&gt;
+  window.NaroscoChatConfig = {
+    <span class="token-key">webhookUrl</span>: <span class="token-string">'https://seu-n8n.com/webhook/clinic-chat'</span>,
+    <span class="token-key">clinicName</span>: <span class="token-string">'Clínica São Lucas'</span>,
+    <span class="token-key">agentName</span>:  <span class="token-string">'Ana'</span>,
+    <span class="token-key">agentEmoji</span>: <span class="token-string">'👩‍⚕️'</span>,
+    <span class="token-key">suggestions</span>: [<span class="token-string">'💳 Planos aceitos?'</span>, <span class="token-string">'💰 Preços'</span>, <span class="token-string">'📅 Agendar'</span>]
+  };
+&lt;/script&gt;
+
+<span class="token-comment">&lt;!-- 2. CSS --&gt;</span>
+&lt;link rel="stylesheet" href="chat.css"&gt;
+
+<span class="token-comment">&lt;!-- 3. JS (antes do &lt;/body&gt;) --&gt;</span>
+&lt;script src="chat.js"&gt;&lt;/script&gt;</code></pre>
+  </section>
+
+  <footer>
+    <p>
+      Desenvolvido por <a href="https://narosco.com.br" target="_blank">Narosco</a> —
+      Potencializando Pessoas e Negócios através da Inteligência Artificial
+    </p>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONFIGURAÇÃO DO WIDGET — Edite antes de usar!
+     ═══════════════════════════════════════════════════════ -->
+<script>
+  window.NaroscoChatConfig = {
+    // ⚠️ OBRIGATÓRIO: URL do seu webhook n8n
+    webhookUrl: 'https://SEU-N8N.com/webhook/clinic-chat',
+
+    // Dados da clínica
+    clinicName: 'Clínica Exemplo',
+    agentName: 'Ana',
+    agentEmoji: '👩‍⚕️',
+
+    // Mensagem de boas-vindas
+    welcomeMessage: 'Olá! 😊 Sou a *Ana*, assistente virtual da Clínica Exemplo.\n\nPosso te ajudar com informações sobre **planos de saúde**, **preços** e **agendamentos**. Como posso te ajudar?',
+
+    // Sugestões rápidas
+    suggestions: [
+      '💳 Planos aceitos?',
+      '💰 Tabela de preços',
+      '📅 Quero agendar',
+      '⏰ Horários'
+    ],
+
+    // Cor principal (hex) — opcional
+    primaryColor: '#1a6bff'
+  };
+
+  // Função auxiliar para testar perguntas pelos chips
+  function testQuestion(text) {
+    NaroscoChat.open();
+    setTimeout(() => NaroscoChat.send(text), 350);
+  }
+</script>
+
+<!-- Widget CSS -->
+<link rel="stylesheet" href="chat.css">
+
+<!-- Widget JS -->
+<script src="chat.js"></script>
+
+</body>
+</html>
