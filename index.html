@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787 https://renovator-zebra-poach.ngrok-free.dev; img-src 'self' data:; frame-src 'none';" />
+    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud https://*.bpcontent.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.botpress.cloud https://*.botpress.cloud; font-src 'self' https: data: https://fonts.gstatic.com; connect-src 'self' https: wss: https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787 https://renovator-zebra-poach.ngrok-free.dev https://*.botpress.cloud https://*.bpcontent.cloud wss://*.botpress.cloud; img-src 'self' data: https: blob:; frame-src 'self' https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud;" />
 
   <title>NAROSCO — Agentes de IA e Automação Inteligente</title>
   <meta name="description"
@@ -1077,7 +1077,11 @@
     </div>
   </div>
 
-  <!-- ░░ AI CHAT WIDGET ░░ -->
+  <!-- ░░ BOTPRESS AI CHAT WIDGET ░░ -->
+  <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/09/02/19/20260902193755-AWCD6UG9.js" defer></script>
+
+  <!-- Widget anterior mantido comentado para evitar sobreposição de botões:
   <script>
     window.NaroscoChatConfig = {
       webhookUrl: 'https://renovator-zebra-poach.ngrok-free.dev/webhook-test/clinic-chat',
@@ -1089,6 +1093,7 @@
     };
   </script>
   <script src="chat-widget/chat.js"></script>
+  -->
 
   <script src="script.js"></script>
   <script>
