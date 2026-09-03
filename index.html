@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud https://*.bpcontent.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.botpress.cloud https://*.botpress.cloud; font-src 'self' https: data: https://fonts.gstatic.com; connect-src 'self' https: wss: https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:8787 https://renovator-zebra-poach.ngrok-free.dev https://*.botpress.cloud https://*.bpcontent.cloud wss://*.botpress.cloud; img-src 'self' data: https: blob:; frame-src 'self' https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud;" />
+    content="default-src 'self' https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://unpkg.com https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud https://*.bpcontent.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.botpress.cloud https://*.botpress.cloud; font-src 'self' https: data: https://fonts.gstatic.com; connect-src 'self' https: http: wss: ws: https://api.web3forms.com https://narosco-api.jhonatanf.workers.dev http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://*.botpress.cloud https://*.bpcontent.cloud wss://*.botpress.cloud; img-src 'self' data: https: http: blob:; frame-src 'self' https://cdn.botpress.cloud https://*.botpress.cloud https://files.bpcontent.cloud; worker-src 'self' blob:;" />
 
   <title>NAROSCO — Agentes de IA e Automação Inteligente</title>
   <meta name="description"
@@ -151,6 +151,8 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="chat-widget/chat.css" />
+  <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/09/02/19/20260902193755-AWCD6UG9.js" defer></script>
 </head>
 
 <body>
@@ -1077,9 +1079,31 @@
     </div>
   </div>
 
-  <!-- ░░ BOTPRESS AI CHAT WIDGET ░░ -->
-  <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2026/09/02/19/20260902193755-AWCD6UG9.js" defer></script>
+  <!-- ░░ BOTPRESS TRIGGER BUTTON (toggleChatId: "bp-toggle-chat") ░░ -->
+  <button id="bp-toggle-chat" aria-label="Abrir assistente virtual" style="
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #df8a43 0%, #c4722d 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 6px 24px rgba(223, 138, 67, 0.45);
+    cursor: pointer;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  " onmouseenter="this.style.transform='scale(1.08)'; this.style.boxShadow='0 8px 30px rgba(223, 138, 67, 0.6)';" onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 24px rgba(223, 138, 67, 0.45)';">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+
 
   <!-- Widget anterior mantido comentado para evitar sobreposição de botões:
   <script>
