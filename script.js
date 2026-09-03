@@ -1,187 +1,76 @@
-/* ══════════════════════════════════════════════
-   NAROSCO — JavaScript
-   - Animated grid canvas
-   - Agent diagram connections
-   - Animated counters
-   - Scroll reveal
+/* ══════════════════════════════════════════════════════════════
+   NAROSCO — Main Script
+   - Scroll reveal animations
    - FAQ accordion
+   - ROI Calculator
+   - Nav behavior
    - Form submission
-   ══════════════════════════════════════════════ */
+   - Mobile menu
+   - Smooth scroll
+   ══════════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  // ── 0. THEME MANAGEMENT ────────────────────────────────────────
-  const themeToggle = document.getElementById('theme-toggle');
-  const iconSun = document.querySelector('.icon-sun');
-  const iconMoon = document.querySelector('.icon-moon');
+  // ── 1. SCROLL REVEAL (Intersection Observer) ──────────────
+  function initReveal() {
+    const revealSelectors = [
+      '.hero-badge', '.hero-title', '.hero-sub', '.hero-ctas',
+      '.hero-process-badge',
+      '.task-item', '.problem-statement',
+      '.transform-card', '.transform-arrow-col',
+      '.cap-card',
+      '.step', '.steps-timeline',
+      '.agent-card',
+      '.case-placeholder',
+      '.tech-block',
+      '.roi-card',
+      '.about-story', '.methodology-grid',
+      '.contact-card',
+      '.faq-item'
+    ];
 
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    if (theme === 'dark') {
-      iconSun.style.display = 'block';
-      iconMoon.style.display = 'none';
-    } else {
-      iconSun.style.display = 'none';
-      iconMoon.style.display = 'block';
-    }
-  }
-
-  // Detect user preference or saved theme
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  if (savedTheme) {
-    setTheme(savedTheme);
-  } else if (prefersDark) {
-    setTheme('dark');
-  } else {
-    setTheme('light');
-  }
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-  }
-
-  // ── 1. ANIMATED GRID CANVAS ────────────────────────────────────
-  const canvas = document.getElementById('grid-canvas');
-  const ctx = canvas.getContext('2d');
-
-  let W, H, dots = [];
-  const DOT_COUNT = 80;
-  const MOUSE = { x: -9999, y: -9999 };
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function initDots() {
-    dots = [];
-    for (let i = 0; i < DOT_COUNT; i++) {
-      dots.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.5 + 0.5,
+    const revealEls = [];
+    revealSelectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.setAttribute('data-reveal', '');
+        revealEls.push(el);
       });
-    }
-  }
-
-  function drawFrame() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Update & draw dots
-    dots.forEach(d => {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > W) d.vx *= -1;
-      if (d.y < 0 || d.y > H) d.vy *= -1;
-
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(249, 115, 22, 0.25)';
-      ctx.fill();
     });
 
-    // Draw connections
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
-          const alpha = (1 - dist / 130) * 0.12;
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-
-      // Mouse proximity highlight
-      const mdx = dots[i].x - MOUSE.x;
-      const mdy = dots[i].y - MOUSE.y;
-      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-      if (mdist < 160) {
-        const alpha = (1 - mdist / 160) * 0.5;
-        ctx.beginPath();
-        ctx.moveTo(dots[i].x, dots[i].y);
-        ctx.lineTo(MOUSE.x, MOUSE.y);
-        ctx.strokeStyle = `rgba(249, 115, 22, ${alpha})`;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-      }
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: show all
+      revealEls.forEach(el => el.classList.add('revealed'));
+      return;
     }
 
-    requestAnimationFrame(drawFrame);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        // Stagger siblings
+        const siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
+        const idx = siblings.indexOf(el);
+        const delay = idx * 60;
+        setTimeout(() => el.classList.add('revealed'), delay);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
   }
 
-  window.addEventListener('resize', () => { resize(); initDots(); });
-  window.addEventListener('mousemove', e => { MOUSE.x = e.clientX; MOUSE.y = e.clientY; });
-
-  resize();
-  initDots();
-  drawFrame();
-
-  // ── 2. AGENT DIAGRAM SVG CONNECTIONS ──────────────────────────
-  function drawAgentConnections() {
-    const diagram = document.querySelector('.agent-diagram');
-    const central = document.getElementById('central-node');
-    const svgEl = document.getElementById('connections-svg');
-    if (!diagram || !central || !svgEl) return;
-
-    const nodeIds = ['node-1', 'node-2', 'node-3', 'node-4', 'node-5'];
-    const dRect = diagram.getBoundingClientRect();
-    const cRect = central.getBoundingClientRect();
-    const cx = cRect.left - dRect.left + cRect.width / 2;
-    const cy = cRect.top - dRect.top + cRect.height / 2;
-
-    let html = '';
-    nodeIds.forEach((id, i) => {
-      const node = document.getElementById(id);
-      if (!node) return;
-      const nRect = node.getBoundingClientRect();
-      const nx = nRect.left - dRect.left + nRect.width / 2;
-      const ny = nRect.top - dRect.top + nRect.height / 2;
-
-      const delay = i * 0.3;
-      html += `
-        <line
-          x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}"
-          stroke="rgba(249,115,22,0.25)" stroke-width="1"
-          stroke-dasharray="4 4"
-          style="animation: dash-anim 2s linear ${delay}s infinite"
-        />`;
-    });
-
-    svgEl.innerHTML = `<style>
-      @keyframes dash-anim {
-        to { stroke-dashoffset: -20; }
-      }
-    </style>` + html;
-  }
-
-  setTimeout(drawAgentConnections, 300);
-  window.addEventListener('resize', drawAgentConnections);
-
-  // ── 3. COUNTER ANIMATION ───────────────────────────────────────
+  // ── 2. COUNTER ANIMATION ──────────────────────────────────
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
+    if (isNaN(target)) return;
     const duration = 2000;
     const start = performance.now();
 
     function tick(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(ease * target);
       if (progress < 1) requestAnimationFrame(tick);
     }
@@ -190,7 +79,6 @@
   }
 
   const countersStarted = new Set();
-
   function checkCounters() {
     document.querySelectorAll('[data-target]').forEach(el => {
       if (countersStarted.has(el)) return;
@@ -202,42 +90,7 @@
     });
   }
 
-  // ── 4. SCROLL REVEAL ──────────────────────────────────────────
-  function initReveal() {
-    const revealEls = [];
-
-    // Mark elements for reveal
-    const selectors = [
-      '.pain-card', '.step', '.testimonial', '.faq-item',
-      '.use-case-item', '.contact-card', '.hero-badge',
-      '.hero-title', '.hero-sub', '.hero-ctas', '.hero-stats'
-    ];
-
-    selectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => {
-        el.setAttribute('data-reveal', '');
-        revealEls.push(el);
-      });
-    });
-
-    function checkReveal() {
-      revealEls.forEach((el) => {
-        if (el.classList.contains('revealed')) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 60) {
-          // Stagger sibling cards
-          const delay = Array.from(el.parentElement?.children || []).indexOf(el) * 80;
-          setTimeout(() => el.classList.add('revealed'), delay);
-        }
-      });
-    }
-
-    window.addEventListener('scroll', () => { checkReveal(); checkCounters(); }, { passive: true });
-    checkReveal();
-    checkCounters();
-  }
-
-  // ── 5. FAQ ACCORDION ──────────────────────────────────────────
+  // ── 3. FAQ ACCORDION ──────────────────────────────────────
   function initFAQ() {
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -262,25 +115,51 @@
     });
   }
 
-  // ── 6. NAV SCROLL BEHAVIOR ────────────────────────────────────
+  // ── 4. NAV SCROLL BEHAVIOR ────────────────────────────────
   function initNav() {
     const nav = document.getElementById('main-nav');
+    if (!nav) return;
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y > 80) {
-        nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
-      } else {
-        nav.style.borderBottomColor = '';
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 80) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     }, { passive: true });
   }
 
-  // ── 7. FORM SUBMISSION ────────────────────────────────────────
+  // ── 5. MOBILE NAV TOGGLE ──────────────────────────────────
+  function initMobileNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close menu on link click
+    nav.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // ── 6. FORM SUBMISSION ────────────────────────────────────
   function initForm() {
     const form = document.getElementById('lead-form');
     const modal = document.getElementById('success-modal');
-
     if (!form) return;
 
     form.addEventListener('submit', async (e) => {
@@ -289,7 +168,6 @@
       const btn = form.querySelector('#form-submit');
       const originalText = btn.innerHTML;
 
-      // Loading state
       btn.disabled = true;
       btn.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="animation:spin 1s linear infinite">
@@ -299,14 +177,9 @@
 
       try {
         const formData = new FormData(form);
-
-        // --- CONFIGURAÇÃO WEB3FORMS ---
-        // 1. Acesse https://web3forms.com/
-        // 2. Coloque o email contato@narosco.com para gerar uma Access Key gratuita
-        // 3. Substitua 'SUA_ACCESS_KEY_AQUI' pela chave recebida no email
         formData.append("access_key", "8b31ae2b-3b21-40bd-bf48-d7163ded65c3");
-        formData.append("subject", "Novo Lead do Site - Narosco");
-        formData.append("from_name", "Narosco Website");
+        formData.append("subject", "Novo Lead — Diagnóstico NAROSCO");
+        formData.append("from_name", "NAROSCO Website");
 
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
@@ -322,24 +195,68 @@
             modal.querySelector('#modal-close')?.focus();
           }
         } else {
-          alert("Ocorreu um erro ao enviar (" + (data.message || 'Desconhecido') + "). Por favor, tente novamente.");
+          alert("Erro ao enviar (" + (data.message || 'Desconhecido') + "). Tente novamente.");
         }
       } catch (err) {
         console.error(err);
-        alert("Ocorreu um erro de rede. Verifique sua conexão e tente novamente.");
+        alert("Erro de rede. Verifique sua conexão e tente novamente.");
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
       }
+    });
 
-      // Close modal on backdrop click
-      modal?.addEventListener('click', e => {
-        if (e.target === modal) modal.hidden = true;
-      });
+    modal?.addEventListener('click', e => {
+      if (e.target === modal) modal.hidden = true;
     });
   }
 
-  // ── 8. SMOOTH ANCHOR OFFSET (account for fixed nav) ──────────
+  // ── 7. ROI CALCULATOR ─────────────────────────────────────
+  function initROI() {
+    const people = document.getElementById('roi-people');
+    const hours = document.getElementById('roi-hours');
+    const cost = document.getElementById('roi-cost');
+
+    if (!people || !hours || !cost) return;
+
+    const peopleVal = document.getElementById('roi-people-val');
+    const hoursVal = document.getElementById('roi-hours-val');
+    const costVal = document.getElementById('roi-cost-val');
+
+    const resHours = document.getElementById('roi-res-hours');
+    const resMonthly = document.getElementById('roi-res-monthly');
+    const resAnnual = document.getElementById('roi-res-annual');
+
+    function formatCurrency(value) {
+      return 'R$ ' + value.toLocaleString('pt-BR');
+    }
+
+    function calculate() {
+      const p = parseInt(people.value, 10);
+      const h = parseInt(hours.value, 10);
+      const c = parseInt(cost.value, 10);
+
+      const monthlyHours = p * h * 4.33; // avg weeks per month
+      const monthlyCost = monthlyHours * c;
+      const annualCost = monthlyCost * 12;
+
+      if (peopleVal) peopleVal.textContent = p + (p === 1 ? ' pessoa' : ' pessoas');
+      if (hoursVal) hoursVal.textContent = h + ' horas/semana';
+      if (costVal) costVal.textContent = 'R$ ' + c + '/hora';
+
+      if (resHours) resHours.textContent = Math.round(monthlyHours) + 'h';
+      if (resMonthly) resMonthly.textContent = formatCurrency(Math.round(monthlyCost));
+      if (resAnnual) resAnnual.textContent = formatCurrency(Math.round(annualCost));
+    }
+
+    [people, hours, cost].forEach(input => {
+      input.addEventListener('input', calculate);
+    });
+
+    calculate(); // Initial calc
+  }
+
+  // ── 8. SMOOTH ANCHOR SCROLL ───────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -351,172 +268,25 @@
     });
   });
 
-  // ── INIT ─────────────────────────────────────────────────────
+  // ── 9. SCROLL LISTENERS ───────────────────────────────────
+  window.addEventListener('scroll', () => {
+    checkCounters();
+  }, { passive: true });
+
+  // ── INIT ──────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initFAQ();
     initNav();
+    initMobileNav();
     initForm();
-    initChatWidget();
+    initROI();
+    checkCounters();
   });
 
-  // CSS spin keyframe for loader
+  // CSS spin keyframe
   const style = document.createElement('style');
   style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
   document.head.appendChild(style);
-
-  // ── AI CHAT WIDGET LOGIC ─────────────────────────────────────
-  function initChatWidget() {
-    const toggleBtn = document.getElementById('chat-toggle-btn');
-    const panel = document.getElementById('chat-panel');
-    const closeBtn = document.getElementById('chat-close-btn');
-    const badge = document.getElementById('chat-badge');
-    const messageContainer = document.getElementById('chat-messages');
-    const chatForm = document.getElementById('chat-form');
-    const inputField = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('chat-send-btn');
-    
-    // Status visual
-    let isOpen = false;
-
-    // Abrir/Fechar Widget — animação via classe CSS, display:none após transição
-    function openChat() {
-      isOpen = true;
-      panel.hidden = false;           // torna visível no DOM
-      badge.style.display = 'none';   // oculta badge de não-lido
-      // Força o browser a fazer um reflow antes de adicionar a classe de entrada
-      // para que a transição CSS dispare corretamente a partir do estado inicial
-      requestAnimationFrame(() => {
-        panel.classList.add('chat-panel--open');
-      });
-      // Foca o input após a animação
-      setTimeout(() => {
-        inputField?.focus();
-        scrollToBottom();
-      }, 210);
-    }
-
-    function closeChat() {
-      isOpen = false;
-      panel.classList.remove('chat-panel--open');
-      // Aguarda a transição (200ms) antes de realmente remover do layout
-      setTimeout(() => {
-        if (!isOpen) panel.hidden = true;
-      }, 210);
-    }
-
-    function toggleChat() {
-      if (isOpen) closeChat(); else openChat();
-    }
-
-    toggleBtn?.addEventListener('click', toggleChat);
-    closeBtn?.addEventListener('click', toggleChat);
-
-    // Enter press
-    inputField?.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        chatForm.dispatchEvent(new Event('submit'));
-      }
-    });
-
-    // Handle Input
-    inputField?.addEventListener('input', () => {
-      sendBtn.disabled = inputField.value.trim() === '';
-    });
-
-    chatForm?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const message = inputField.value.trim();
-      if (!message) return;
-
-      appendMessage(message, 'user');
-      inputField.value = '';
-      sendBtn.disabled = true;
-
-      // Mocking typing indicator
-      const typingId = appendTypingIndicator();
-      
-      // Async Call -> Backend Architecture
-      try {
-        const response = await sendToSupportBot(message);
-        removeTypingIndicator(typingId);
-        appendMessage(response, 'bot');
-      } catch (err) {
-        removeTypingIndicator(typingId);
-        appendMessage("Desculpe, nossos sistemas de IA estão ocupados no momento. Poderia tentar reiniciar a conversa ou entrar em contato via e-mail?", 'bot');
-      }
-    });
-
-    function appendMessage(text, senderType) {
-      const div = document.createElement('div');
-      div.className = `chat-message ${senderType}`;
-      // Security: use textContent to prevent XSS from user-supplied messages
-      const content = document.createElement('div');
-      content.className = 'message-content';
-      content.textContent = text;
-      div.appendChild(content);
-      messageContainer.appendChild(div);
-      scrollToBottom();
-    }
-
-    function appendTypingIndicator() {
-      const id = 'typing-' + Date.now();
-      const div = document.createElement('div');
-      div.id = id;
-      div.className = 'chat-message bot typing-indicator';
-      div.innerText = 'Digitando...'; // Placeholder, ideally dots animation
-      div.style.opacity = '0.6';
-      div.style.fontStyle = 'italic';
-      messageContainer.appendChild(div);
-      scrollToBottom();
-      return id;
-    }
-
-    function removeTypingIndicator(id) {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    }
-
-    function scrollToBottom() {
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
-  }
-
-  // Gerenciamento de Session ID
-  let sessionId = sessionStorage.getItem('chat_session_id');
-  if (!sessionId) {
-    sessionId = crypto.randomUUID();
-    sessionStorage.setItem('chat_session_id', sessionId);
-  }
-
-  /**
-   * Ponte Segura para o Backend Cloudflare Workers
-   */
-  async function sendToSupportBot(userMessage) {
-    try {
-      // Altere a URL base conforme o deploy no Cloudflare Workers
-      // Ex: https://narosco-api.seu-usuario.workers.dev/api/chat
-      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:8787/api/chat'
-        : 'https://narosco-api.jhonatanf.workers.dev/api/chat';
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, sessionId })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data.reply;
-    } catch (error) {
-      console.error("Erro na comunicação com o Bot:", error);
-      throw error;
-    }
-  }
 
 })();

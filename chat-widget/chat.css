@@ -1,0 +1,478 @@
+/* ===================================================
+   Narosco Clinic Chat Widget — chat.css
+   Widget de chat flutuante para clínicas
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ── Variáveis ── */
+:root {
+  --chat-primary: #1a6bff;
+  --chat-primary-dark: #1458d4;
+  --chat-primary-light: #e8f0ff;
+  --chat-accent: #00c896;
+  --chat-bg: #ffffff;
+  --chat-surface: #f5f7fa;
+  --chat-border: #e4e8f0;
+  --chat-text: #1a1a2e;
+  --chat-text-muted: #6b7280;
+  --chat-bubble-user: #1a6bff;
+  --chat-bubble-agent: #f0f4ff;
+  --chat-shadow: 0 8px 32px rgba(26, 107, 255, 0.18);
+  --chat-radius: 20px;
+  --chat-radius-sm: 12px;
+  --chat-width: 380px;
+  --chat-height: 560px;
+  --chat-z: 99999;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Reset ── */
+#narosco-chat-widget *,
+#narosco-chat-widget *::before,
+#narosco-chat-widget *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Container principal ── */
+#narosco-chat-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--chat-z);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--chat-text);
+}
+
+/* ── Botão flutuante (bubble) ── */
+#narosco-chat-bubble {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--chat-primary), #4f8bff);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--chat-shadow);
+  transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s ease;
+  position: relative;
+  outline: none;
+}
+
+#narosco-chat-bubble:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 40px rgba(26, 107, 255, 0.28);
+}
+
+#narosco-chat-bubble:active {
+  transform: scale(0.96);
+}
+
+#narosco-chat-bubble svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#narosco-chat-bubble .icon-chat { display: block; }
+#narosco-chat-bubble .icon-close { display: none; }
+
+#narosco-chat-widget.open #narosco-chat-bubble .icon-chat { display: none; }
+#narosco-chat-widget.open #narosco-chat-bubble .icon-close { display: block; }
+
+/* Badge de notificação */
+#narosco-chat-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  background: #ff4757;
+  border-radius: 50%;
+  border: 2px solid white;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  animation: badge-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ── Janela do chat ── */
+#narosco-chat-window {
+  position: absolute;
+  bottom: 76px;
+  right: 0;
+  width: var(--chat-width);
+  height: var(--chat-height);
+  background: var(--chat-bg);
+  border-radius: var(--chat-radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16), 0 4px 16px rgba(26, 107, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.85) translateY(20px);
+  transform-origin: bottom right;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), opacity 0.22s ease;
+  border: 1px solid var(--chat-border);
+}
+
+#narosco-chat-widget.open #narosco-chat-window {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Header ── */
+#narosco-chat-header {
+  background: linear-gradient(135deg, var(--chat-primary), #2979ff);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.chat-header-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.chat-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-header-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  display: block;
+}
+
+.chat-header-status {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.chat-header-status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: #4eff91;
+  border-radius: 50%;
+  display: inline-block;
+  animation: status-blink 2s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Área de mensagens ── */
+#narosco-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fafbff;
+  scroll-behavior: smooth;
+}
+
+#narosco-chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+#narosco-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#narosco-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--chat-border);
+  border-radius: 4px;
+}
+
+/* ── Mensagens ── */
+.chat-msg {
+  max-width: 82%;
+  animation: msg-appear 0.22s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes msg-appear {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+}
+
+.chat-msg.agent {
+  align-self: flex-start;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.chat-msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--chat-primary), #4f8bff);
+  color: white;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-msg-bubble {
+  padding: 10px 14px;
+  border-radius: var(--chat-radius-sm);
+  font-size: 13.5px;
+  line-height: 1.55;
+  position: relative;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.chat-msg.user .chat-msg-bubble {
+  background: var(--chat-bubble-user);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg.agent .chat-msg-bubble {
+  background: white;
+  color: var(--chat-text);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--chat-border);
+}
+
+.chat-msg-time {
+  font-size: 10px;
+  color: var(--chat-text-muted);
+  margin-top: 4px;
+  display: block;
+  text-align: right;
+}
+
+.chat-msg.agent .chat-msg-time {
+  text-align: left;
+  padding-left: 36px;
+}
+
+/* ── Typing indicator ── */
+.chat-typing {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  align-self: flex-start;
+}
+
+.chat-typing-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--chat-primary), #4f8bff);
+  color: white;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-typing-bubble {
+  background: white;
+  border: 1px solid var(--chat-border);
+  border-radius: var(--chat-radius-sm);
+  border-bottom-left-radius: 4px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.chat-typing-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--chat-primary);
+  border-radius: 50%;
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+.chat-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ── Sugestões rápidas ── */
+#narosco-chat-suggestions {
+  padding: 8px 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: #fafbff;
+  border-top: 1px solid var(--chat-border);
+  flex-shrink: 0;
+}
+
+.chat-suggestion-btn {
+  background: white;
+  border: 1.5px solid var(--chat-primary);
+  color: var(--chat-primary);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font);
+  white-space: nowrap;
+}
+
+.chat-suggestion-btn:hover {
+  background: var(--chat-primary);
+  color: white;
+}
+
+/* ── Footer / Input ── */
+#narosco-chat-footer {
+  padding: 12px 16px;
+  background: white;
+  border-top: 1px solid var(--chat-border);
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+#narosco-chat-input {
+  flex: 1;
+  border: 1.5px solid var(--chat-border);
+  border-radius: 20px;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-family: var(--font);
+  color: var(--chat-text);
+  background: var(--chat-surface);
+  outline: none;
+  resize: none;
+  max-height: 100px;
+  line-height: 1.4;
+  transition: border-color 0.15s ease;
+}
+
+#narosco-chat-input::placeholder {
+  color: #b0b7c3;
+}
+
+#narosco-chat-input:focus {
+  border-color: var(--chat-primary);
+  background: white;
+}
+
+#narosco-chat-send {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--chat-primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+  outline: none;
+}
+
+#narosco-chat-send:hover:not(:disabled) {
+  background: var(--chat-primary-dark);
+  transform: scale(1.06);
+}
+
+#narosco-chat-send:disabled {
+  background: #c7d2e8;
+  cursor: not-allowed;
+}
+
+#narosco-chat-send svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+/* ── Powered by ── */
+.chat-powered {
+  text-align: center;
+  font-size: 10px;
+  color: #b0b7c3;
+  padding: 4px 0 8px;
+  background: white;
+}
+
+.chat-powered a {
+  color: var(--chat-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ── Mensagem de erro inline ── */
+.chat-msg-error .chat-msg-bubble {
+  background: #fff2f2;
+  border-color: #ffcdd2;
+  color: #c62828;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  #narosco-chat-widget {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  #narosco-chat-window {
+    width: calc(100vw - 32px);
+    height: 75vh;
+    bottom: 72px;
+    right: 0;
+  }
+}
