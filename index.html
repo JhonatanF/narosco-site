@@ -1079,6 +1079,30 @@
     </div>
   </div>
 
+  <!-- ░░ BOTPRESS TRIGGER BUTTON (toggleChatId: "bp-toggle-chat") ░░ -->
+  <button id="bp-toggle-chat" aria-label="Abrir assistente virtual" style="
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #df8a43 0%, #c4722d 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 6px 24px rgba(223, 138, 67, 0.45);
+    cursor: pointer;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  " onmouseenter="this.style.transform='scale(1.08)'; this.style.boxShadow='0 8px 30px rgba(223, 138, 67, 0.6)';" onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 24px rgba(223, 138, 67, 0.45)';">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
 
 
   <!-- Widget anterior mantido comentado para evitar sobreposição de botões:
