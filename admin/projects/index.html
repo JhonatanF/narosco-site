@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Narosco Admin — Centralized Projects Command Center</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0C0D10;
+      --recessed: #13151B;
+      --border: #22242A;
+      --border-strong: #323642;
+      --text: #F8FAFC;
+      --text-muted: #9CA3AF;
+      --orange: #FA6000;
+      --orange-bright: #FF8533;
+      --green: #22C55E;
+      --amber: #F59E0B;
+      --red: #F43F5E;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* Top Pill Header */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      background: rgba(12, 13, 16, 0.9);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      margin-bottom: 2.25rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.05rem;
+      color: #FFF;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--orange); }
+    .brand-tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(250, 96, 0, 0.14);
+      color: var(--orange-bright);
+      border: 1px solid rgba(250, 96, 0, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Hero Title */
+    .hero-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      max-width: 640px;
+      font-size: 0.96rem;
+    }
+
+    .updated-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.75rem;
+      color: #D4D4D8;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+    }
+
+    /* KPI Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.15rem 1.25rem;
+    }
+
+    .kpi-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .kpi-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #FFF;
+    }
+
+    .kpi-value.orange { color: var(--orange); }
+    .kpi-value.green { color: var(--green); }
+
+    /* Filters */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.42rem 0.9rem;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--border-strong); color: #FFF; }
+    .filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #050505;
+      font-weight: 700;
+    }
+
+    .search-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.48rem 1rem;
+      color: #FFF;
+      font-size: 0.84rem;
+      min-width: 240px;
+      outline: none;
+    }
+
+    .search-input:focus { border-color: var(--orange); }
+
+    /* 2-Column Bento Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.35rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .project-card {
+      background: rgba(12, 13, 16, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: border-color 0.22s, transform 0.22s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(250, 96, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .kicker {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #FFF;
+      margin-top: 0.15rem;
+    }
+
+    .score-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.14);
+      color: #4ADE80;
+      border: 1px solid rgba(34, 197, 94, 0.38);
+      white-space: nowrap;
+    }
+
+    .score-pill.warn {
+      background: rgba(245, 158, 11, 0.14);
+      color: #FBBF24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #D4D4D8;
+    }
+
+    /* 4 Station Badges */
+    .stations-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .station-box {
+      background: var(--recessed);
+      border: 1px solid #20232C;
+      border-radius: 10px;
+      padding: 0.45rem 0.55rem;
+    }
+
+    .st-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .st-val {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #4ADE80;
+    }
+
+    .st-val.WARN { color: #FBBF24; }
+    .st-val.FAIL { color: #FB7185; }
+
+    .subprojects-box {
+      background: #090A0D;
+      border: 1px solid #1E212B;
+      border-radius: 12px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    .subprojects-box strong {
+      color: var(--orange-bright);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .sub-pill {
+      display: inline-block;
+      margin: 0.18rem 0.35rem 0.1rem 0;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #161820;
+      border: 1px solid #282B36;
+      color: #E4E4E7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+    }
+
+    .card-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #1C1F27;
+      font-size: 0.78rem;
+    }
+
+    .local-path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-sm {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--recessed);
+      color: #F4F4F5;
+      transition: all 0.18s;
+    }
+
+    .btn-sm:hover { border-color: var(--orange); color: #FFF; }
+    .btn-sm.primary {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #050505;
+      font-weight: 700;
+    }
+
+    /* Overlap Table */
+    .panel-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .panel-section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .panel-section p.lead {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.75rem;
+      border-bottom: 1px solid #1D2028;
+    }
+
+    th {
+      color: var(--text-muted);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      background: #171921;
+      padding: 0.14rem 0.42rem;
+      border-radius: 6px;
+      color: var(--orange-bright);
+    }
+
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .stations-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <a class="brand" href="/">
+        NAROSCO<span>.SYS</span>
+        <span class="brand-tag">/admin/projects</span>
+      </a>
+      <nav class="nav-links">
+        <a href="https://narosco.com" target="_blank" rel="noopener">narosco.com</a>
+        <a href="https://jhonatan.narosco.com" target="_blank" rel="noopener">jhonatan.narosco.com</a>
+        <a href="https://github.com/JhonatanF" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <section class="hero-head">
+      <div>
+        <h1>Projects Command Center</h1>
+        <p class="subtitle">
+          Centralizador único da Linha de Fabricação Paralela (<code id="cli-cmd">node d:\Projetos\factory-line\factory.mjs --strict</code>): projetos canônicos consolidados, submódulos acoplados e histórico de deduplicação.
+        </p>
+      </div>
+      <div class="updated-pill" id="updated-at">Carregando manifesto...</div>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Projetos Canônicos</div>
+        <div class="kpi-value orange" id="kpi-total">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Score Médio Gates</div>
+        <div class="kpi-value green" id="kpi-score">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Subprojetos Integrados</div>
+        <div class="kpi-value" id="kpi-subs">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Duplicados Arquivados</div>
+        <div class="kpi-value" id="kpi-archived">—</div>
+      </div>
+    </section>
+
+    <section class="controls-bar">
+      <div class="filter-pills" id="domain-filters">
+        <button class="filter-btn active" data-domain="all">Todos</button>
+        <button class="filter-btn" data-domain="Portfolio">Portfólio &amp; Site</button>
+        <button class="filter-btn" data-domain="Finance">Finanças</button>
+        <button class="filter-btn" data-domain="AI Agents">Agentes &amp; Growth</button>
+        <button class="filter-btn" data-domain="Sports">Futebol / RIM</button>
+        <button class="filter-btn" data-domain="Education">Concursos</button>
+      </div>
+      <input type="search" id="search-box" class="search-input" placeholder="Buscar projeto, stack ou subprojeto..." />
+    </section>
+
+    <section class="projects-grid" id="projects-grid"></section>
+
+    <section class="panel-section">
+      <h2>Estação 0 — Consolidação &amp; Arquivamento de Protótipos</h2>
+      <p class="lead">Projetos sobrepostos unificados em uma única base canônica sem perder código ou histórico.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Domínio</th>
+              <th>Projeto Canônico Ativo</th>
+              <th>Subprojetos / Addons Integrados</th>
+              <th>Arquivados em _archived_duplicates</th>
+            </tr>
+          </thead>
+          <tbody id="overlaps-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (async function init() {
+      const grid = document.getElementById('projects-grid');
+      const tbody = document.getElementById('overlaps-tbody');
+      const updatedEl = document.getElementById('updated-at');
+      const searchEl = document.getElementById('search-box');
+      const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+
+      let manifest = null;
+      try {
+        const res = await fetch('./projects-manifest.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Manifest unavailable');
+        manifest = await res.json();
+      } catch (err) {
+        updatedEl.textContent = 'Manifesto offline — rode factory.mjs';
+        return;
+      }
+
+      const projects = manifest.projects || [];
+      const overlaps = manifest.overlaps || [];
+
+      const totalSubs = projects.reduce((acc, p) => acc + (p.subprojects ? p.subprojects.length : 0), 0);
+      const totalArchived = overlaps.reduce((acc, o) => acc + (o.archived ? o.archived.length : 0), 0);
+      const avgScore = projects.length
+        ? Math.round(projects.reduce((acc, p) => acc + (p.score || 0), 0) / projects.length)
+        : 0;
+
+      document.getElementById('kpi-total').textContent = projects.length;
+      document.getElementById('kpi-score').textContent = `${avgScore}%`;
+      document.getElementById('kpi-subs').textContent = totalSubs;
+      document.getElementById('kpi-archived').textContent = totalArchived;
+
+      const genDate = manifest.generatedAt ? new Date(manifest.generatedAt).toLocaleString('pt-BR') : 'Agora';
+      updatedEl.textContent = `Auditado em ${genDate} · ${(manifest.elapsedMs / 1000).toFixed(2)}s`;
+
+      let activeDomain = 'all';
+
+      function escapeHtml(text) {
+        return String(text ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function renderCards() {
+        const query = searchEl.value.trim().toLowerCase();
+        const filtered = projects.filter((p) => {
+          const matchesDomain = activeDomain === 'all' || p.domain === activeDomain;
+          const hay = `${p.name} ${p.stack} ${p.description} ${(p.subprojects || []).join(' ')}`.toLowerCase();
+          const matchesSearch = !query || hay.includes(query);
+          return matchesDomain && matchesSearch;
+        });
+
+        grid.innerHTML = filtered.map((p) => {
+          const scoreClass = p.score >= 100 ? '' : 'warn';
+          const stationsHtml = (p.stations || []).map((s) => `
+            <div class="station-box" title="${escapeHtml(s.summary)}">
+              <span class="st-name">${escapeHtml(s.station)}</span>
+              <span class="st-val ${escapeHtml(s.status)}">${escapeHtml(s.status)}</span>
+            </div>
+          `).join('');
+
+          const subsHtml = (p.subprojects && p.subprojects.length > 0)
+            ? `<div class="subprojects-box"><strong>Subprojetos Integrados</strong>${p.subprojects.map((sp) => `<span class="sub-pill">${escapeHtml(sp)}</span>`).join('')}</div>`
+            : '';
+
+          const liveBtn = p.liveUrl
+            ? `<a class="btn-sm primary" href="${escapeHtml(p.liveUrl)}" target="_blank" rel="noopener">Abrir Site</a>`
+            : '';
+
+          const testInfo = (p.stations || []).find((s) => s.station === 'FUNCTIONALITY')?.summary || '';
+
+          return `
+            <article class="project-card">
+              <div class="card-top">
+                <div>
+                  <span class="kicker">${escapeHtml(p.domain)} · ${escapeHtml(p.stack)}</span>
+                  <h3 class="card-title">${escapeHtml(p.name)}</h3>
+                </div>
+                <span class="score-pill ${scoreClass}">${p.score}% · 4/4</span>
+              </div>
+              <p class="card-desc">${escapeHtml(p.description)}</p>
+              <div class="stations-row">${stationsHtml}</div>
+              ${subsHtml}
+              <div class="card-footer">
+                <span class="local-path">${escapeHtml(testInfo)}</span>
+                <div class="card-actions">
+                  <button class="btn-sm" data-copy="node d:\\Projetos\\factory-line\\factory.mjs ${escapeHtml(p.name)} --strict">Copiar Check</button>
+                  ${liveBtn}
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        grid.querySelectorAll('[data-copy]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const cmd = btn.getAttribute('data-copy');
+            try {
+              await navigator.clipboard.writeText(cmd);
+              const old = btn.textContent;
+              btn.textContent = 'Copiado!';
+              setTimeout(() => { btn.textContent = old; }, 1400);
+            } catch {}
+          });
+        });
+      }
+
+      tbody.innerHTML = overlaps.map((o) => `
+        <tr>
+          <td><strong>${escapeHtml(o.domain)}</strong></td>
+          <td><code>${escapeHtml(o.canonical)}</code></td>
+          <td>${escapeHtml((o.active || []).join(', ') || '—')}</td>
+          <td>${escapeHtml((o.archived || []).join(', ') || '—')}</td>
+        </tr>
+      `).join('');
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeDomain = btn.getAttribute('data-domain');
+          renderCards();
+        });
+      });
+
+      searchEl.addEventListener('input', renderCards);
+      renderCards();
+    })();
+  </script>
+</body>
+</html>

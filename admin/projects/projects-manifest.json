@@ -1,0 +1,279 @@
+{
+  "generatedAt": "2026-11-16T21:47:46.903Z",
+  "elapsedMs": 10818,
+  "projects": [
+    {
+      "name": "jhonatan-carrer",
+      "stack": "Astro Web",
+      "score": 100,
+      "domain": "Portfolio",
+      "description": "Portfólio Staff Backend Engineer & Software Architect com laboratório 3D Cinema4D em Astro + Three.js.",
+      "liveUrl": "https://jhonatan.narosco.com",
+      "subprojects": [],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Astro Web)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (10.7s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "Build estático verificado (dist/index.html + /pt)"
+        }
+      ]
+    },
+    {
+      "name": "community-group-mesage",
+      "stack": "Node + TypeScript",
+      "score": 100,
+      "domain": "AI Agents",
+      "description": "Agente autônomo de grupos VIP de promoções (WhatsApp/Telegram), conversor de afiliados e Smart Hub em Hono.",
+      "liveUrl": "",
+      "subprojects": [],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Node + TypeScript)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (0.5s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "7 passed (7) · 65 passed (65) (1.3s)"
+        }
+      ]
+    },
+    {
+      "name": "finquin-app",
+      "stack": "Expo / React Native",
+      "score": 100,
+      "domain": "Finance",
+      "description": "Plataforma central de inteligência financeira CLT quinzenal (App Mobile + tRPC + CSV/OCR/Guardrails + Subprojetos Telegram & Open Finance).",
+      "liveUrl": "",
+      "subprojects": [
+        "financas-telegram",
+        "open-finance-pierre"
+      ],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Expo / React Native)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (0.4s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "5 passed | 1 skipped (6) · 65 passed | 1 skipped (66) (2.4s)"
+        }
+      ]
+    },
+    {
+      "name": "orchestrator-narosco-ts",
+      "stack": "Node + TypeScript",
+      "score": 100,
+      "domain": "AI Agents",
+      "description": "Orquestrador multi-agentes em LangGraph JS/TS com fábrica de skills/allowlist HITL e especialistas comerciais.",
+      "liveUrl": "",
+      "subprojects": [],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Node + TypeScript)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (8.6s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "26/26 passed (fail=0) (0.7s)"
+        }
+      ]
+    },
+    {
+      "name": "rim-analytics",
+      "stack": "Node.js",
+      "score": 100,
+      "domain": "Sports",
+      "description": "Hub de estatísticas do Racha Idade Média (gols, assistências, presença, mensalidade) + gerador automático de artes e súmula pós-jogo.",
+      "liveUrl": "https://rim.narosco.com",
+      "subprojects": [],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Node.js)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (0.5s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "8/8 passed (fail=0) (0.5s)"
+        }
+      ]
+    },
+    {
+      "name": "go-concurso",
+      "stack": "Node.js",
+      "score": 100,
+      "domain": "Education",
+      "description": "Plataforma de estudos SM-2 / técnica Feynman (Quarkus + React) integrada aos módulos buscador-editais e backend-editais.",
+      "liveUrl": "",
+      "subprojects": [
+        "backend-editais",
+        "buscador-editais"
+      ],
+      "stations": [
+        {
+          "station": "HYGIENE",
+          "status": "PASS",
+          "summary": "Estrutura limpa (Node.js)"
+        },
+        {
+          "station": "SECURITY",
+          "status": "PASS",
+          "summary": "Zero segredos expostos ou rastreados"
+        },
+        {
+          "station": "QUALITY",
+          "status": "PASS",
+          "summary": "npm run build OK (6.3s)"
+        },
+        {
+          "station": "FUNCTIONALITY",
+          "status": "PASS",
+          "summary": "9/9 passed (fail=0) (0.5s)"
+        }
+      ]
+    }
+  ],
+  "overlaps": [
+    {
+      "id": "FINANCE_AI",
+      "domain": "Finanças Pessoais & IA",
+      "canonical": "finquin-app",
+      "active": [
+        "finquin-app",
+        "finquin-app/subprojects/financas-telegram",
+        "finquin-app/subprojects/open-finance-pierre"
+      ],
+      "archived": [
+        "_archived_duplicates/mvp-finance-project",
+        "_archived_duplicates/test-finance-read"
+      ],
+      "recommendation": "Unificado no finquin-app com subprojetos complementares (financas-telegram e open-finance-pierre) e protótipos antigos arquivados."
+    },
+    {
+      "id": "ORCHESTRATOR_AGENTS",
+      "domain": "Orquestradores & Agentes Multi-Agentes",
+      "canonical": "orchestrator-narosco-ts",
+      "active": [
+        "orchestrator-narosco-ts",
+        "narosco-agents/agents-test-to-delivery",
+        "narosco-agents/bboost"
+      ],
+      "archived": [
+        "_archived_duplicates/orchestrator-narosco",
+        "_archived_duplicates/orchestrator-narosco-ts-legacy"
+      ],
+      "recommendation": "Allowlist HITL do orchestrator-narosco portada para orchestrator-narosco-ts na raiz; versões antigas arquivadas."
+    },
+    {
+      "id": "CONCURSOS_EDITAIS",
+      "domain": "Concursos & Busca de Editais",
+      "canonical": "go-concurso",
+      "active": [
+        "go-concurso",
+        "go-concurso/subprojects/backend-editais",
+        "go-concurso/subprojects/buscador-editais"
+      ],
+      "archived": [],
+      "recommendation": "go-concurso finalizado na raiz acoplando backend-editais e buscador-editais em subprojects/."
+    },
+    {
+      "id": "SOCCER_RIM",
+      "domain": "Futebol, Racha & Cortes de Vídeo",
+      "canonical": "rim-analytics",
+      "active": [
+        "rim-analytics",
+        "narosco-agents/narosco-shorts-videos"
+      ],
+      "archived": [
+        "_archived_duplicates/narosco-n8n",
+        "_archived_duplicates/poc-edit-post-rim",
+        "_archived_duplicates/soccer-analysis"
+      ],
+      "recommendation": "rim-analytics consolidado na raiz com motor de estatísticas, art_generator.py e workflow de súmula."
+    },
+    {
+      "id": "PROMO_AFFILIATE",
+      "domain": "Grupos VIP de Ofertas & Afiliados",
+      "canonical": "community-group-mesage",
+      "active": [
+        "community-group-mesage"
+      ],
+      "archived": [],
+      "recommendation": "Sem duplicidade — projeto único e 100% operacional."
+    },
+    {
+      "id": "PORTFOLIO_CAREER",
+      "domain": "Portfólio Pessoal & Painel Central",
+      "canonical": "jhonatan-carrer · narosco-site (/admin/projects)",
+      "active": [
+        "career-ops",
+        "jhonatan-carrer",
+        "narosco-agents/narosco-site"
+      ],
+      "archived": [],
+      "recommendation": "Intuitos distintos; painel centralizado publicado em /admin/projects."
+    }
+  ]
+}
